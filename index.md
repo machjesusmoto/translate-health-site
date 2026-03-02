@@ -18,6 +18,11 @@ We're building something to help chronic illness patients communicate better wit
 
 ## Links
 
+- [Get Started](/register)
+- [Your Dashboard](/dashboard)
+- [Settings & Preferences](/settings)
+- [Support & Help](/support)
+
 - [Privacy Policy](/privacy)
 - [Terms of Service](/terms)
 
