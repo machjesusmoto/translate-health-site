@@ -3,175 +3,1001 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="description" content="Your Translate Health dashboard. You talk. We translate. Doctors listen." />
-<title>Dashboard — Translate Health</title>
+<title>Translate Health — Dashboard</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Geist:wght@300;400;450;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-<link rel="stylesheet" href="/styles.css" />
+<link rel="stylesheet" href="styles.css" />
+
 <style>
-  .page-content { max-width: 720px; margin: 0 auto; padding: 64px 24px; }
-  .page-content h1 { font-family: var(--font-display); font-size: 42px; font-weight: 360; letter-spacing: -0.02em; margin: 0 0 8px; }
-  .page-content h2 { font-family: var(--font-display); font-size: 24px; font-weight: 420; margin: 48px 0 16px; letter-spacing: -0.01em; }
-  .page-content h3 { font-family: var(--font-sans); font-size: 18px; font-weight: 600; margin: 32px 0 12px; }
-  .page-content p { font-size: 16px; line-height: 1.65; color: var(--ink-700); margin: 0 0 16px; }
-  .page-content ul { margin: 0 0 20px; padding-left: 24px; }
-  .page-content li { font-size: 15px; line-height: 1.6; color: var(--ink-700); margin-bottom: 8px; }
-  .page-content a { color: var(--sage-700); text-decoration: none; }
-  .page-content a:hover { text-decoration: underline; }
-  .page-content strong { color: var(--ink-900); font-weight: 500; }
-  .page-content .tag { display: inline-block; padding: 4px 10px; background: var(--sage-50); border: 1px solid var(--sage-100); border-radius: 999; font-family: var(--font-mono); font-size: 11px; color: var(--sage-700); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 24px; }
+  body { background: var(--paper); }
 
-  .static-nav { position: sticky; top: 0; z-index: 50; background: rgba(250,248,245,0.82); backdrop-filter: saturate(180%) blur(12px); -webkit-backdrop-filter: saturate(180%) blur(12px); border-bottom: 1px solid rgba(45,45,45,0.06); }
-  .static-nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 68px; }
-  .static-nav a { font-size: 14px; color: var(--ink-700); text-decoration: none; font-weight: 450; letter-spacing: -0.005em; }
-  .static-nav a:hover { color: var(--sage-700); }
-  .static-nav .nav-links { display: flex; gap: 32px; }
-  .static-nav .nav-cta { display: flex; gap: 12px; align-items: center; }
-  .static-nav .btn-sm { padding: 10px 18px; font-size: 14px; border-radius: 999; background: var(--sage-700); color: var(--paper); text-decoration: none; font-weight: 500; }
+  /* ── App shell ─────────────────────────────────────────── */
+  .app {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 100vh;
+  }
 
-  .static-footer { background: var(--ink-900); color: var(--paper); padding: 72px 0 40px; }
-  .static-footer-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-  .static-footer-grid { display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 48px; margin-bottom: 56px; }
-  .static-footer p { font-size: 14px; color: rgba(250,248,245,0.55); max-width: 280px; line-height: 1.55; margin-top: 18px; }
-  .static-footer .col-title { font-family: var(--font-mono); font-size: 11px; color: rgba(250,248,245,0.45); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; }
-  .static-footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
-  .static-footer li a { color: rgba(250,248,245,0.85); text-decoration: none; font-size: 14px; }
-  .static-footer li a:hover { color: var(--paper); }
-  .static-footer .footer-bottom { padding-top: 24px; border-top: 1px solid rgba(250,248,245,0.10); display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: rgba(250,248,245,0.45); flex-wrap: wrap; gap: 12px; }
+  /* Sidebar */
+  .sidebar {
+    background: var(--paper-deep);
+    border-right: 1px solid rgba(45,45,45,0.06);
+    padding: 24px 18px;
+    display: flex; flex-direction: column; gap: 28px;
+    position: sticky; top: 0; height: 100vh;
+  }
+  .sb-brand { display: flex; align-items: center; gap: 10px; padding: 6px 8px; }
+  .sb-brand .name {
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 460;
+    letter-spacing: -0.005em;
+    color: var(--ink-900);
+  }
+  .sb-section .sb-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--ink-400);
+    padding: 0 8px 6px;
+    font-weight: 500;
+  }
+  .sb-nav { display: flex; flex-direction: column; gap: 1px; }
+  .sb-nav a {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--ink-700);
+    text-decoration: none;
+    font-weight: 450;
+  }
+  .sb-nav a.active {
+    background: var(--sage-50);
+    color: var(--sage-900);
+  }
+  .sb-nav a:hover:not(.active) { background: rgba(45,45,45,0.04); }
+  .sb-nav a .icon { width: 16px; height: 16px; color: var(--sage-700); display: inline-flex; }
+  .sb-nav a.active .icon { color: var(--sage-900); }
 
-  @media (max-width: 768px) {
-    .static-footer-grid { grid-template-columns: 1fr 1fr; }
-    .static-nav .nav-links { display: none; }
+  .sb-bottom { margin-top: auto; }
+  .sb-user {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    background: var(--paper-card);
+    border: 1px solid rgba(45,45,45,0.06);
+  }
+  .sb-avatar {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: linear-gradient(135deg, #4a7a4b, #2c5f2d);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 600; letter-spacing: 0.02em;
+  }
+  .sb-user .nm { font-size: 13px; color: var(--ink-900); font-weight: 500; }
+  .sb-user .sub { font-size: 11px; color: var(--ink-400); }
+
+  /* Main */
+  .main {
+    padding: 28px 40px 80px;
+    max-width: 1480px;
+  }
+  .topbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 18px;
+    border-bottom: 1px solid rgba(45,45,45,0.08);
+    margin-bottom: 28px;
+  }
+  .topbar .greeting {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 380;
+    letter-spacing: -0.018em;
+    color: var(--ink-900);
+    line-height: 1.1;
+  }
+  .topbar .greeting em { color: var(--sage-700); font-style: italic; font-weight: 360; }
+  .topbar .gsub {
+    font-size: 13px; color: var(--ink-500);
+    margin-top: 4px;
+  }
+  .topbar-actions { display: flex; align-items: center; gap: 12px; }
+  .top-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 7px 12px;
+    background: var(--paper-card);
+    border: 1px solid rgba(45,45,45,0.10);
+    border-radius: 999px;
+    font-size: 12px;
+    color: var(--ink-700);
+    font-family: var(--font-mono);
+    letter-spacing: 0.04em;
+  }
+  .top-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--sage-700); }
+  .top-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 9px 14px;
+    background: var(--sage-700);
+    color: var(--paper);
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* Grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+  }
+  .card {
+    background: var(--paper-card);
+    border: 1px solid rgba(45,45,45,0.07);
+    border-radius: 16px;
+    padding: 22px 24px 24px;
+    box-shadow: var(--shadow-card);
+    position: relative;
+  }
+  .card-hd {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+  .card-hd .lbl {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--ink-400);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .card-hd .ttl {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 420;
+    letter-spacing: -0.01em;
+    color: var(--ink-900);
+    line-height: 1.15;
+  }
+  .card-hd .ttl em { color: var(--sage-700); font-style: italic; font-weight: 380; }
+  .hd-link {
+    font-size: 12px; color: var(--sage-700);
+    font-family: var(--font-mono); letter-spacing: 0.04em;
+    text-decoration: none; white-space: nowrap;
+  }
+
+  /* Span helpers */
+  .col-12 { grid-column: span 12; }
+  .col-8  { grid-column: span 8; }
+  .col-7  { grid-column: span 7; }
+  .col-6  { grid-column: span 6; }
+  .col-5  { grid-column: span 5; }
+  .col-4  { grid-column: span 4; }
+
+  /* ── Daily Digest ──────────────────────────────────────── */
+  .digest-meta {
+    display: flex; gap: 18px; align-items: center;
+    padding: 12px 14px;
+    background: var(--paper-deep);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    font-size: 12px;
+    font-family: var(--font-mono);
+    color: var(--ink-500);
+  }
+  .digest-meta .pill-ok {
+    color: var(--sage-700); font-weight: 600;
+    background: var(--sage-50);
+    padding: 3px 8px; border-radius: 999px; font-size: 11px;
+  }
+  .check-row {
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    gap: 18px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(45,45,45,0.06);
+    align-items: flex-start;
+  }
+  .check-row:last-child { border-bottom: none; }
+  .check-time {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-400);
+    padding-top: 2px;
+    letter-spacing: 0.02em;
+  }
+  .check-quote {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-style: italic;
+    color: var(--ink-700);
+    line-height: 1.5;
+    font-weight: 380;
+  }
+  .extracted {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-top: 10px;
+  }
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-family: var(--font-mono);
+    letter-spacing: 0.01em;
+  }
+  .chip-sage { background: var(--sage-50); color: var(--sage-900); }
+  .chip-coral { background: var(--coral-50); color: var(--coral-700); }
+  .chip-ink { background: rgba(45,45,45,0.05); color: var(--ink-700); }
+  .chip-key { color: var(--ink-400); }
+
+  .check-actions {
+    display: flex; gap: 4px;
+  }
+  .icon-btn {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    border: 1px solid rgba(45,45,45,0.10);
+    background: var(--paper);
+    color: var(--ink-500);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+  }
+  .icon-btn:hover { color: var(--sage-700); border-color: var(--sage-300); }
+
+  /* ── Trends ──────────────────────────────────────────── */
+  .trends-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  .trend {
+    background: var(--paper);
+    border: 1px solid rgba(45,45,45,0.06);
+    border-radius: 12px;
+    padding: 16px 18px 14px;
+  }
+  .trend-hd {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 10px;
+  }
+  .trend-hd .nm {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 440;
+    color: var(--ink-900);
+    letter-spacing: -0.005em;
+  }
+  .trend-hd .val {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-500);
+    letter-spacing: 0.02em;
+  }
+  .trend-hd .delta-up { color: var(--coral-700); }
+  .trend-hd .delta-down { color: var(--sage-700); }
+  .trend svg { width: 100%; height: 84px; display: block; }
+  .trend-foot {
+    display: flex; justify-content: space-between;
+    margin-top: 6px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--ink-400);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* range tabs */
+  .range-tabs {
+    display: inline-flex;
+    background: var(--paper-deep);
+    padding: 3px;
+    border-radius: 8px;
+    gap: 2px;
+  }
+  .range-tab {
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-500);
+    letter-spacing: 0.04em;
+    cursor: pointer;
+  }
+  .range-tab.active { background: var(--paper-card); color: var(--ink-900); box-shadow: 0 1px 2px rgba(0,0,0,0.04); }
+
+  /* ── Correlations ────────────────────────────────────── */
+  .corr-stat {
+    display: flex; align-items: baseline; gap: 10px;
+  }
+  .corr-stat .r {
+    font-family: var(--font-display);
+    font-size: 64px;
+    font-weight: 360;
+    letter-spacing: -0.02em;
+    color: var(--sage-700);
+    line-height: 0.95;
+  }
+  .corr-stat .strength {
+    font-size: 12px; color: var(--ink-500);
+    font-family: var(--font-mono); letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .corr-quote {
+    margin-top: 14px;
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: var(--ink-900);
+    letter-spacing: -0.005em;
+  }
+  .corr-quote em { color: var(--coral-500); font-style: italic; font-weight: 460; }
+  .scatter {
+    margin-top: 16px;
+    background: var(--paper);
+    border-radius: 10px;
+    border: 1px solid rgba(45,45,45,0.05);
+    padding: 14px 14px 8px;
+  }
+
+  /* ── Weekly Summary ──────────────────────────────────── */
+  .week-card {
+    background: linear-gradient(180deg, var(--sage-50), var(--paper-card));
+    border: 1px solid var(--sage-100);
+  }
+  .week-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 14px;
+  }
+  .week-stat {
+    background: var(--paper-card);
+    border: 1px solid rgba(45,45,45,0.06);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .week-stat .l {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-400);
+  }
+  .week-stat .v {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: -0.012em;
+    color: var(--ink-900);
+    margin-top: 4px;
+    line-height: 1;
+  }
+  .week-stat .d {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    margin-top: 4px;
+  }
+  .delta-up { color: var(--coral-700); }
+  .delta-down { color: var(--sage-700); }
+
+  .week-narr {
+    margin-top: 14px;
+    font-family: var(--font-display);
+    font-size: 17px;
+    line-height: 1.5;
+    color: var(--ink-700);
+    font-weight: 380;
+  }
+  .week-narr em { color: var(--sage-700); font-style: italic; font-weight: 420; }
+
+  /* ── Provider Reports ───────────────────────────────── */
+  .prov-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .prov-tile {
+    background: var(--paper);
+    border: 1px solid rgba(45,45,45,0.10);
+    border-radius: 12px;
+    padding: 14px 14px;
+    cursor: pointer;
+    display: flex; align-items: flex-start; gap: 12px;
+  }
+  .prov-tile.active {
+    background: var(--sage-700); color: var(--paper);
+    border-color: var(--sage-700);
+  }
+  .prov-tile .ic {
+    width: 30px; height: 30px;
+    border-radius: 8px;
+    background: var(--sage-50);
+    color: var(--sage-700);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .prov-tile.active .ic { background: rgba(255,255,255,0.15); color: var(--paper); }
+  .prov-tile .nm { font-size: 14px; font-weight: 500; color: var(--ink-900); letter-spacing: -0.005em; }
+  .prov-tile.active .nm { color: var(--paper); }
+  .prov-tile .sb { font-size: 11px; color: var(--ink-400); margin-top: 1px; }
+  .prov-tile.active .sb { color: rgba(250,248,245,0.7); }
+  .prov-foot {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(45,45,45,0.06);
+  }
+  .prov-foot .info { font-size: 12px; color: var(--ink-500); }
+  .prov-foot .info em { color: var(--sage-700); font-style: italic; font-weight: 500; }
+  .gen-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--ink-900);
+    color: var(--paper);
+    padding: 9px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+  }
+
+  /* ── Agent Activity ─────────────────────────────────── */
+  .feed { display: flex; flex-direction: column; }
+  .feed-row {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(45,45,45,0.06);
+    align-items: flex-start;
+  }
+  .feed-row:last-child { border-bottom: none; }
+  .agent-mark {
+    width: 32px; height: 32px;
+    border-radius: 9px;
+    background: var(--sage-50);
+    color: var(--sage-700);
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--sage-100);
+  }
+  .feed-row.alert .agent-mark { background: var(--coral-50); color: var(--coral-700); border-color: var(--coral-200); }
+  .feed-meta {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px; row-gap: 2px;
+    font-size: 12px;
+    font-family: var(--font-mono);
+    letter-spacing: 0.02em;
+  }
+  .feed-meta .agent { color: var(--sage-700); font-weight: 600; }
+  .feed-row.alert .feed-meta .agent { color: var(--coral-700); }
+  .feed-meta .time { color: var(--ink-400); }
+  .feed-msg {
+    margin-top: 4px;
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--ink-900);
+    line-height: 1.5;
+  }
+  .feed-msg em { color: var(--coral-500); font-style: italic; font-weight: 460; }
+  .feed-msg strong { font-weight: 480; color: var(--ink-900); }
+  .feed-action {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--sage-700);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  /* utility */
+  .row { display: flex; align-items: center; gap: 8px; }
+
+  @media (max-width: 1100px) {
+    .col-8, .col-7, .col-5, .col-4 { grid-column: span 12; }
+    .trends-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
-<body data-warmth="warm" data-density="default">
+<body>
 
-<header class="static-nav">
-  <div class="static-nav-inner">
-    <a href="/" style="display: inline-flex; align-items: center; gap: 10px; color: var(--ink-900); font-family: var(--font-display); font-size: 19px; font-weight: 420; letter-spacing: -0.01em; text-decoration: none;">
-      <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-        <path d="M6 11 C 6 7, 10 5, 14 7 L 14 11" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" />
-        <path d="M18 21 L 18 25 C 22 27, 26 25, 26 21" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" />
-        <circle cx="10" cy="16" r="1.6" fill="currentColor" />
-        <circle cx="16" cy="16" r="1.6" fill="currentColor" />
-        <circle cx="22" cy="16" r="1.6" fill="currentColor" />
+<div class="app">
+
+  <!-- ── SIDEBAR ───────────────────────────────────── -->
+  <aside class="sidebar">
+    <div class="sb-brand">
+      <svg width="26" height="26" viewBox="0 0 32 32" fill="none">
+        <path d="M6 11 C 6 7, 10 5, 14 7 L 14 11" stroke="var(--sage-700)" stroke-width="1.6" fill="none" stroke-linecap="round" />
+        <path d="M18 21 L 18 25 C 22 27, 26 25, 26 21" stroke="var(--sage-700)" stroke-width="1.6" fill="none" stroke-linecap="round" />
+        <circle cx="10" cy="16" r="1.6" fill="var(--sage-700)" />
+        <circle cx="16" cy="16" r="1.6" fill="var(--sage-700)" />
+        <circle cx="22" cy="16" r="1.6" fill="var(--sage-700)" />
       </svg>
-      Translate Health
-    </a>
-    <nav class="nav-links">
-      <a href="/#how">How it works</a>
-      <a href="/#agents">Agents</a>
-      <a href="/" style="opacity: 0.5; pointer-events: none;">For providers</a>
-      <a href="/" style="opacity: 0.5; pointer-events: none;">About</a>
-    </nav>
-    <div class="nav-cta">
-      <a href="/" style="opacity: 0.5; pointer-events: none;">Sign in</a>
-      <a href="/#waitlist" class="btn-sm">Join waitlist</a>
+      <span class="name">Translate Health</span>
     </div>
-  </div>
-</header>
 
-<main class="page-content">
-  <div class="tag">Coming soon</div>
-  <h1>Your Health Dashboard</h1>
-
-  <p>Your personal dashboard is where your health data comes together. Once available, you'll be able to review, correct, and explore everything you've tracked — all in one place.</p>
-
-  <h2>What You'll Find Here</h2>
-
-  <h3>Daily Digest</h3>
-  <p>Review and correct today's parsed check-ins. If the AI misread something ("7 out of 10" pain instead of "7 AM wake-up"), you fix it right here.</p>
-
-  <h3>Trends</h3>
-  <p>Visualize blood pressure, pain levels, sleep quality, fatigue, and other tracked symptoms over time. See how things change week to week and month to month.</p>
-
-  <h3>Correlations</h3>
-  <p>AI-detected patterns between your symptoms, sleep, triggers, and other factors. Things like "pain tends to spike two days after poor sleep" — patterns that are hard to spot on your own.</p>
-
-  <h3>Provider Reports</h3>
-  <p>Generate structured, provider-ready reports for your doctor appointments. No more scrambling to remember what happened since your last visit. Share a clean summary with one tap.</p>
-
-  <h3>Data Export</h3>
-  <p>Download your complete health history in standard formats. Your data is yours — you can take it with you anytime.</p>
-
-  <div style="margin: 48px 0; padding: 32px; background: var(--paper-deep); border-radius: 12px; text-align: center;">
-    <p style="margin: 0; color: var(--ink-500);"><strong>Access your dashboard by logging in with your registered phone number.</strong></p>
-    <p style="margin-top: 12px;"><a href="/register" style="color: var(--sage-700);">Don't have an account? Get started →</a></p>
-  </div>
-
-  <div style="margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(45,45,45,0.10); font-size: 14px; color: var(--ink-500); display: flex; gap: 24px; flex-wrap: wrap;">
-    <a href="/privacy">Privacy Policy</a>
-    <a href="/terms">Terms of Service</a>
-    <a href="/settings">Settings & Preferences</a>
-    <a href="/support">Support & Help</a>
-  </div>
-</main>
-
-<footer class="static-footer">
-  <div class="static-footer-inner">
-    <div class="static-footer-grid">
-      <div>
-        <a href="/" style="display: inline-flex; align-items: center; gap: 10px; color: var(--paper); font-family: var(--font-display); font-size: 19px; font-weight: 420; letter-spacing: -0.01em; text-decoration: none;">
-          <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-            <path d="M6 11 C 6 7, 10 5, 14 7 L 14 11" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" />
-            <path d="M18 21 L 18 25 C 22 27, 26 25, 26 21" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" />
-            <circle cx="10" cy="16" r="1.6" fill="currentColor" />
-            <circle cx="16" cy="16" r="1.6" fill="currentColor" />
-            <circle cx="22" cy="16" r="1.6" fill="currentColor" />
-          </svg>
-          Translate Health
+    <div class="sb-section">
+      <div class="sb-label">Workspace</div>
+      <nav class="sb-nav">
+        <a href="#" class="active">
+          <span class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg></span>
+          Dashboard
         </a>
-        <p>An AI health coordination platform for chronic illness. You talk. We translate. Doctors listen.</p>
-      </div>
-      <div>
-        <div class="col-title">Product</div>
-        <ul>
-          <li><a href="/#how">How it works</a></li>
-          <li><a href="/#agents">Agents</a></li>
-          <li><a href="/" style="opacity: 0.45; pointer-events: none;">Features</a></li>
-          <li><a href="/" style="opacity: 0.45; pointer-events: none;">For providers</a></li>
-          <li><a href="/" style="opacity: 0.45; pointer-events: none;">Pricing</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="col-title">Company</div>
-        <ul>
-          <li><a href="/" style="opacity: 0.45; pointer-events: none;">About</a></li>
-          <li><a href="/" style="opacity: 0.45; pointer-events: none;">Blog</a></li>
-          <li><a href="/#waitlist">Founding 500</a></li>
-          <li><a href="/" style="opacity: 0.45; pointer-events: none;">Careers</a></li>
-          <li><a href="/" style="opacity: 0.45; pointer-events: none;">Press</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="col-title">Resources</div>
-        <ul>
-          <li><a href="/" style="opacity: 0.45; pointer-events: none;">Patient guide</a></li>
-          <li><a href="/" style="opacity: 0.45; pointer-events: none;">Provider one-pager</a></li>
-          <li><a href="/" style="opacity: 0.45; pointer-events: none;">Security</a></li>
-          <li><a href="/" style="opacity: 0.45; pointer-events: none;">Status</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="col-title">Legal</div>
-        <ul>
-          <li><a href="/privacy">Privacy</a></li>
-          <li><a href="/terms">Terms</a></li>
-          <li><a href="/" style="opacity: 0.45; pointer-events: none;">HIPAA notice</a></li>
-          <li><a href="/" style="opacity: 0.45; pointer-events: none;">Subprocessors</a></li>
-        </ul>
-      </div>
+        <a href="#">
+          <span class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 5 Q3 3 5 3 H11 Q13 3 13 5 V8 Q13 10 11 10 H8 L5 13 V10 Q3 10 3 8 Z" /></svg></span>
+          Conversations
+        </a>
+        <a href="#">
+          <span class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 13 V3 M2 13 H14"/><path d="M4 11 L7 7 L9 9 L13 4"/></svg></span>
+          Trends
+        </a>
+        <a href="#">
+          <span class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="6" cy="6" r="3"/><circle cx="11" cy="11" r="3"/><line x1="8" y1="8" x2="9" y2="9"/></svg></span>
+          Correlations
+        </a>
+        <a href="#">
+          <span class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="2" width="10" height="13" rx="1"/><line x1="5" y1="6" x2="11" y2="6"/><line x1="5" y1="9" x2="11" y2="9"/><line x1="5" y1="12" x2="9" y2="12"/></svg></span>
+          Reports
+        </a>
+        <a href="#">
+          <span class="icon"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 2 L13 5 V9 Q13 12, 8 14 Q3 12, 3 9 V5 Z"/></svg></span>
+          Records
+        </a>
+      </nav>
     </div>
-    <div class="footer-bottom">
-      <span>© 2026 Translate Health · Built by patients, for patients</span>
-      <span style="font-family: var(--font-mono);">v 0.1.0 · Founding 500</span>
-    </div>
-  </div>
-</footer>
 
+    <div class="sb-section">
+      <div class="sb-label">Agents · 7 active</div>
+      <nav class="sb-nav">
+        <a href="#"><span class="icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="2"/><circle cx="8" cy="8" r="5" opacity=".5"/></svg></span>Coordinator</a>
+        <a href="#"><span class="icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 5 Q3 3 5 3 H11 Q13 3 13 5 V8 Q13 10 11 10 H8 L5 13 V10 Q3 10 3 8 Z"/></svg></span>Translator</a>
+        <a href="#"><span class="icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 13 V3 M2 13 H14"/><path d="M4 11 L7 7 L9 9 L13 4"/></svg></span>Analyst</a>
+        <a href="#"><span class="icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="10" height="11" rx="1"/></svg></span>Storyteller</a>
+        <a href="#"><span class="icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 2 L13 5 V9 Q13 12, 8 14 Q3 12, 3 9 V5 Z"/></svg></span>Advocate</a>
+      </nav>
+    </div>
+
+    <div class="sb-bottom">
+      <div class="sb-user">
+        <div class="sb-avatar">SR</div>
+        <div>
+          <div class="nm">Sarah R.</div>
+          <div class="sub">Founding 500 · Day 184</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── MAIN ──────────────────────────────────────── -->
+  <main class="main">
+
+    <!-- topbar -->
+    <div class="topbar">
+      <div>
+        <div class="greeting">Good afternoon, <em>Sarah.</em></div>
+        <div class="gsub">Tuesday · April 30 · 2:47 pm · Day 184 of tracking</div>
+      </div>
+      <div class="topbar-actions">
+        <span class="top-pill"><span class="dot"></span> 7 agents · all active</span>
+        <button class="top-btn">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5 Q3 3 5 3 H11 Q13 3 13 5 V8 Q13 10 11 10 H8 L5 13 V10 Q3 10 3 8 Z"/></svg>
+          Log a check-in
+        </button>
+      </div>
+    </div>
+
+    <div class="grid">
+
+      <!-- ╭─ Daily Digest ─╮ -->
+      <section class="card col-7">
+        <div class="card-hd">
+          <div>
+            <div class="lbl">01 · Daily digest</div>
+            <div class="ttl">Today, in <em>your own words.</em></div>
+          </div>
+          <a href="#" class="hd-link">View all check-ins ↗</a>
+        </div>
+
+        <div class="digest-meta">
+          <span class="pill-ok">PARSED</span>
+          <span>3 check-ins · 4 symptoms · 2 events</span>
+          <span style="margin-left:auto">last sync · 2:47 pm</span>
+        </div>
+
+        <div class="check-row">
+          <div class="check-time">8:14 AM</div>
+          <div>
+            <div class="check-quote">"bad night maybe 5 hrs, knees hurt like a 6, really tired even tho i slept"</div>
+            <div class="extracted">
+              <span class="chip chip-sage"><span class="chip-key">sleep</span>5.0 h</span>
+              <span class="chip chip-sage"><span class="chip-key">knee_pain</span>6 / 10</span>
+              <span class="chip chip-coral"><span class="chip-key">fatigue</span>despite_sleep</span>
+            </div>
+          </div>
+          <div class="check-actions">
+            <button class="icon-btn" aria-label="Edit"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 14 L5 13 L13 5 L11 3 L3 11 Z"/></svg></button>
+            <button class="icon-btn" aria-label="Approve"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8 L7 12 L13 4" stroke-linecap="round"/></svg></button>
+          </div>
+        </div>
+
+        <div class="check-row">
+          <div class="check-time">12:30 PM</div>
+          <div>
+            <div class="check-quote">"meds w/ lunch — same as yesterday, took the half dose of the new one"</div>
+            <div class="extracted">
+              <span class="chip chip-ink"><span class="chip-key">medication</span>methylphenidate · 5mg</span>
+              <span class="chip chip-ink"><span class="chip-key">timestamp</span>12:30 pm</span>
+            </div>
+          </div>
+          <div class="check-actions">
+            <button class="icon-btn" aria-label="Edit"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 14 L5 13 L13 5 L11 3 L3 11 Z"/></svg></button>
+            <button class="icon-btn" aria-label="Approve"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8 L7 12 L13 4" stroke-linecap="round"/></svg></button>
+          </div>
+        </div>
+
+        <div class="check-row">
+          <div class="check-time">2:47 PM</div>
+          <div>
+            <div class="check-quote">"ugh sharp pain in my heel just started, feels like 9/10 — was just sitting"</div>
+            <div class="extracted">
+              <span class="chip chip-coral"><span class="chip-key">heel_pain</span>9 / 10 · sharp</span>
+              <span class="chip chip-coral"><span class="chip-key">trigger</span>none · idiopathic</span>
+              <span class="chip chip-sage"><span class="chip-key">activity</span>sedentary</span>
+            </div>
+          </div>
+          <div class="check-actions">
+            <button class="icon-btn" aria-label="Edit"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M2 14 L5 13 L13 5 L11 3 L3 11 Z"/></svg></button>
+            <button class="icon-btn" aria-label="Approve"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8 L7 12 L13 4" stroke-linecap="round"/></svg></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ╭─ Correlations ─╮ -->
+      <section class="card col-5">
+        <div class="card-hd">
+          <div>
+            <div class="lbl">03 · Correlations</div>
+            <div class="ttl">A pattern <em>worth noticing.</em></div>
+          </div>
+          <a href="#" class="hd-link">All findings (9) ↗</a>
+        </div>
+
+        <div class="corr-stat">
+          <span class="r">0.72</span>
+          <span class="strength">r · STRONG</span>
+        </div>
+
+        <div class="corr-quote">
+          Sleep quality → <em>next-day pain.</em><br />
+          Fragmented nights predict heightened pain the following morning, with high confidence.
+        </div>
+
+        <div class="scatter">
+          <svg viewBox="0 0 360 130" width="100%" height="130">
+            <!-- axes -->
+            <line x1="34" y1="10" x2="34" y2="106" stroke="#d8d6d1" stroke-width="1"/>
+            <line x1="34" y1="106" x2="350" y2="106" stroke="#d8d6d1" stroke-width="1"/>
+            <!-- gridlines -->
+            <line x1="34" y1="34" x2="350" y2="34" stroke="#ecf1ec" stroke-width="1" stroke-dasharray="2 3"/>
+            <line x1="34" y1="70" x2="350" y2="70" stroke="#ecf1ec" stroke-width="1" stroke-dasharray="2 3"/>
+            <!-- regression line -->
+            <line x1="48" y1="92" x2="338" y2="22" stroke="#2c5f2d" stroke-width="1.4" opacity="0.7"/>
+            <!-- points -->
+            <g fill="#4a7a4b">
+              <circle cx="58" cy="94" r="3.2"/><circle cx="78" cy="86" r="3.2"/><circle cx="92" cy="92" r="3.2"/>
+              <circle cx="118" cy="78" r="3.2"/><circle cx="138" cy="82" r="3.2"/><circle cx="156" cy="68" r="3.2"/>
+              <circle cx="176" cy="72" r="3.2"/><circle cx="198" cy="56" r="3.2"/><circle cx="222" cy="60" r="3.2"/>
+              <circle cx="244" cy="48" r="3.2"/><circle cx="268" cy="40" r="3.2"/><circle cx="292" cy="46" r="3.2"/>
+              <circle cx="316" cy="32" r="3.2"/><circle cx="332" cy="28" r="3.2"/>
+            </g>
+            <!-- coral outliers -->
+            <g fill="#e07a5f">
+              <circle cx="64" cy="74" r="3.2"/><circle cx="186" cy="40" r="3.2"/>
+            </g>
+            <!-- axis labels -->
+            <text x="190" y="124" text-anchor="middle" fill="#8a8a8a" font-family="JetBrains Mono" font-size="9" letter-spacing="1">SLEEP QUALITY (1–10) →</text>
+            <text x="14" y="58" text-anchor="middle" fill="#8a8a8a" font-family="JetBrains Mono" font-size="9" letter-spacing="1" transform="rotate(-90 14 58)">PAIN ↑</text>
+          </svg>
+        </div>
+      </section>
+
+      <!-- ╭─ Trends (full width) ─╮ -->
+      <section class="card col-12">
+        <div class="card-hd">
+          <div>
+            <div class="lbl">02 · Trends</div>
+            <div class="ttl">Thirty days of <em>signal.</em></div>
+          </div>
+          <div class="row">
+            <div class="range-tabs">
+              <span class="range-tab">7D</span>
+              <span class="range-tab active">30D</span>
+              <span class="range-tab">90D</span>
+              <span class="range-tab">1Y</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="trends-grid">
+
+          <!-- Sleep -->
+          <div class="trend">
+            <div class="trend-hd">
+              <div>
+                <div class="nm">Sleep hours</div>
+              </div>
+              <div class="val">avg <strong style="color:var(--ink-900)">5.8h</strong> · <span class="delta-up">↓ 0.6 vs 30d</span></div>
+            </div>
+            <svg viewBox="0 0 360 84" preserveAspectRatio="none">
+              <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#9bb39c" stop-opacity="0.4"/><stop offset="100%" stop-color="#9bb39c" stop-opacity="0"/></linearGradient></defs>
+              <line x1="0" y1="32" x2="360" y2="32" stroke="#ecf1ec" stroke-dasharray="2 3"/>
+              <path d="M0,40 L12,38 L24,52 L36,46 L48,32 L60,28 L72,52 L84,60 L96,44 L108,38 L120,40 L132,52 L144,58 L156,48 L168,38 L180,32 L192,46 L204,52 L216,60 L228,52 L240,42 L252,38 L264,48 L276,56 L288,62 L300,54 L312,46 L324,40 L336,38 L348,46 L360,52 L360,84 L0,84 Z" fill="url(#g1)"/>
+              <path d="M0,40 L12,38 L24,52 L36,46 L48,32 L60,28 L72,52 L84,60 L96,44 L108,38 L120,40 L132,52 L144,58 L156,48 L168,38 L180,32 L192,46 L204,52 L216,60 L228,52 L240,42 L252,38 L264,48 L276,56 L288,62 L300,54 L312,46 L324,40 L336,38 L348,46 L360,52" stroke="#2c5f2d" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="trend-foot"><span>APR 01</span><span>HOURS · TARGET 7</span><span>APR 30</span></div>
+          </div>
+
+          <!-- Pain severity -->
+          <div class="trend">
+            <div class="trend-hd">
+              <div class="nm">Pain severity</div>
+              <div class="val">avg <strong style="color:var(--ink-900)">5.4 / 10</strong> · <span class="delta-up">↑ 1.2</span></div>
+            </div>
+            <svg viewBox="0 0 360 84" preserveAspectRatio="none">
+              <defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e07a5f" stop-opacity="0.30"/><stop offset="100%" stop-color="#e07a5f" stop-opacity="0"/></linearGradient></defs>
+              <line x1="0" y1="42" x2="360" y2="42" stroke="#fbeee8" stroke-dasharray="2 3"/>
+              <path d="M0,52 L12,48 L24,46 L36,52 L48,44 L60,38 L72,32 L84,40 L96,46 L108,38 L120,30 L132,24 L144,32 L156,38 L168,30 L180,22 L192,26 L204,18 L216,22 L228,30 L240,26 L252,18 L264,12 L276,18 L288,22 L300,16 L312,12 L324,18 L336,12 L348,8 L360,14 L360,84 L0,84 Z" fill="url(#g2)"/>
+              <path d="M0,52 L12,48 L24,46 L36,52 L48,44 L60,38 L72,32 L84,40 L96,46 L108,38 L120,30 L132,24 L144,32 L156,38 L168,30 L180,22 L192,26 L204,18 L216,22 L228,30 L240,26 L252,18 L264,12 L276,18 L288,22 L300,16 L312,12 L324,18 L336,12 L348,8 L360,14" stroke="#b85a44" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="348" cy="8" r="3" fill="#e07a5f"/>
+            </svg>
+            <div class="trend-foot"><span>APR 01</span><span>0–10 · SELF-REPORT</span><span>APR 30</span></div>
+          </div>
+
+          <!-- Fatigue -->
+          <div class="trend">
+            <div class="trend-hd">
+              <div class="nm">Fatigue</div>
+              <div class="val">avg <strong style="color:var(--ink-900)">6.1 / 10</strong> · <span class="delta-up">↑ 0.8</span></div>
+            </div>
+            <svg viewBox="0 0 360 84" preserveAspectRatio="none">
+              <g fill="#9bb39c">
+                <rect x="2"  y="48" width="6" height="34" rx="1.5"/>
+                <rect x="14" y="42" width="6" height="40" rx="1.5"/>
+                <rect x="26" y="50" width="6" height="32" rx="1.5"/>
+                <rect x="38" y="38" width="6" height="44" rx="1.5"/>
+                <rect x="50" y="42" width="6" height="40" rx="1.5"/>
+                <rect x="62" y="36" width="6" height="46" rx="1.5"/>
+                <rect x="74" y="30" width="6" height="52" rx="1.5"/>
+                <rect x="86" y="42" width="6" height="40" rx="1.5"/>
+                <rect x="98" y="36" width="6" height="46" rx="1.5"/>
+                <rect x="110" y="32" width="6" height="50" rx="1.5"/>
+                <rect x="122" y="28" width="6" height="54" rx="1.5"/>
+                <rect x="134" y="22" width="6" height="60" rx="1.5"/>
+                <rect x="146" y="32" width="6" height="50" rx="1.5"/>
+                <rect x="158" y="38" width="6" height="44" rx="1.5"/>
+                <rect x="170" y="30" width="6" height="52" rx="1.5"/>
+                <rect x="182" y="22" width="6" height="60" rx="1.5"/>
+                <rect x="194" y="26" width="6" height="56" rx="1.5"/>
+                <rect x="206" y="18" width="6" height="64" rx="1.5"/>
+                <rect x="218" y="24" width="6" height="58" rx="1.5"/>
+                <rect x="230" y="30" width="6" height="52" rx="1.5"/>
+                <rect x="242" y="22" width="6" height="60" rx="1.5"/>
+                <rect x="254" y="14" width="6" height="68" rx="1.5"/>
+                <rect x="266" y="20" width="6" height="62" rx="1.5"/>
+                <rect x="278" y="14" width="6" height="68" rx="1.5"/>
+                <rect x="290" y="22" width="6" height="60" rx="1.5"/>
+                <rect x="302" y="18" width="6" height="64" rx="1.5"/>
+                <rect x="314" y="12" width="6" height="70" rx="1.5"/>
+                <rect x="326" y="20" width="6" height="62" rx="1.5"/>
+                <rect x="338" y="14" width="6" height="68" rx="1.5"/>
+                <rect x="350" y="10" width="6" height="72" rx="1.5" fill="#2c5f2d"/>
+              </g>
+            </svg>
+            <div class="trend-foot"><span>APR 01</span><span>DAILY SCORE</span><span>APR 30</span></div>
+          </div>
+
+          <!-- BP -->
+          <div class="trend">
+            <div class="trend-hd">
+              <div class="nm">Blood pressure</div>
+              <div class="val">avg <strong style="color:var(--ink-900)">128 / 82</strong> · <span class="delta-up">↑ stage 1</span></div>
+            </div>
+            <svg viewBox="0 0 360 84" preserveAspectRatio="none">
+              <line x1="0" y1="20" x2="360" y2="20" stroke="#fbeee8" stroke-dasharray="2 3"/>
+              <line x1="0" y1="56" x2="360" y2="56" stroke="#ecf1ec" stroke-dasharray="2 3"/>
+              <!-- systolic -->
+              <path d="M0,32 L12,30 L24,34 L36,28 L48,30 L60,26 L72,32 L84,28 L96,24 L108,30 L120,26 L132,22 L144,28 L156,30 L168,24 L180,18 L192,24 L204,20 L216,16 L228,22 L240,18 L252,14 L264,20 L276,18 L288,12 L300,16 L312,14 L324,18 L336,12 L348,8 L360,14"
+                    stroke="#b85a44" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- diastolic -->
+              <path d="M0,62 L12,60 L24,64 L36,58 L48,62 L60,58 L72,62 L84,58 L96,56 L108,60 L120,56 L132,54 L144,58 L156,60 L168,54 L180,50 L192,56 L204,52 L216,48 L228,54 L240,50 L252,46 L264,52 L276,50 L288,44 L300,48 L312,46 L324,50 L336,44 L348,42 L360,46"
+                    stroke="#4a7a4b" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="trend-foot"><span>APR 01</span><span><span style="color:#b85a44">SYS</span> · <span style="color:#4a7a4b">DIA</span></span><span>APR 30</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ╭─ Weekly Summary ─╮ -->
+      <section class="card week-card col-7">
+        <div class="card-hd">
+          <div>
+            <div class="lbl">04 · Weekly summary</div>
+            <div class="ttl">Week of <em>April 21.</em></div>
+          </div>
+          <a href="#" class="hd-link">Last 12 weeks ↗</a>
+        </div>
+
+        <div class="week-grid">
+          <div class="week-stat">
+            <div class="l">Sleep avg</div>
+            <div class="v">5.8h</div>
+            <div class="d delta-up">↓ from 6.4h</div>
+          </div>
+          <div class="week-stat">
+            <div class="l">Heel pain</div>
+            <div class="v">4 ep.</div>
+            <div class="d delta-up">↑ from 1</div>
+          </div>
+          <div class="week-stat">
+            <div class="l">Highest day</div>
+            <div class="v">Sat</div>
+            <div class="d">Pain 9 · 5h sleep</div>
+          </div>
+          <div class="week-stat">
+            <div class="l">Med adherence</div>
+            <div class="v">95%</div>
+            <div class="d delta-down">↑ from 87%</div>
+          </div>
+        </div>
+
+        <div class="week-narr">
+          <em>The Storyteller writes:</em> Sleep dipped notably this week, and <em>heel pain</em> showed up four times — three of them following nights with under five hours. You stayed on top of medications. Saturday was your hardest day; gentle pacing on Sunday helped you recover.
+        </div>
+      </section>
+
+      <!-- ╭─ Provider Reports ─╮ -->
+      <section class="card col-5">
+        <div class="card-hd">
+          <div>
+            <div class="lbl">05 · Provider reports</div>
+            <div class="ttl">Generate report <em>for…</em></div>
+          </div>
+        </div>
+
+        <div class="prov-grid">
+          <div class="prov-tile active">
+            <div class="ic"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="5"/><path d="M8 4 V8 L11 10"/></svg></div>
+            <div>
+              <div class="nm">Rheumatology</div>
+              <div class="sb">14 days · joint focus</div>
+            </div>
+          </div>
+          <div class="prov-tile">
+            <div class="ic"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 2 Q5 4 5 7 Q5 9 7 10 V14"/><path d="M8 2 Q11 4 11 7 Q11 9 9 10 V14"/></svg></div>
+            <div>
+              <div class="nm">Neurology</div>
+              <div class="sb">30 days · sleep, cog.</div>
+            </div>
+          </div>
+          <div class="prov-tile">
+            <div class="ic"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M8 14 Q3 10 3 6 Q3 3 5.5 3 Q7 3 8 5 Q9 3 10.5 3 Q13 3 13 6 Q13 10 8 14 Z"/></svg></div>
+            <div>
+              <div class="nm">Primary care</div>
+              <div class="sb">90 days · all systems</div>
+            </div>
+          </div>
+          <div class="prov-tile">
+            <div class="ic"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="6" r="2.5"/><path d="M3 14 Q3 10 8 10 Q13 10 13 14"/></svg></div>
+            <div>
+              <div class="nm">Psychiatry</div>
+              <div class="sb">30 days · mood, sleep</div>
+            </div>
+          </div>
+          <div class="prov-tile">
+            <div class="ic"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 13 V3 M3 13 H13"/><path d="M5 11 L7 8 L9 9 L12 5"/></svg></div>
+            <div>
+              <div class="nm">Endocrinology</div>
+              <div class="sb">90 days · energy, BP</div>
+            </div>
+          </div>
+          <div class="prov-tile">
+            <div class="ic"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="10" height="10" rx="1"/><line x1="3" y1="6" x2="13" y2="6"/></svg></div>
+            <div>
+              <div class="nm">Custom</div>
+              <div class="sb">Pick metrics</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="prov-foot">
+          <div class="info">Last sent · <em>Dr. Hadley</em>, Apr 14 · 2 weeks ago</div>
+          <button class="gen-btn">
+            Generate
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 8 H13 M9 4 L13 8 L9 12" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- ╭─ Agent Activity ─╮ -->
+      <section class="card col-12">
+        <div class="card-hd">
+          <div>
+            <div class="lbl">06 · Agent activity</div>
+            <div class="ttl">What the team has been <em>quietly working on.</em></div>
+          </div>
+          <a href="#" class="hd-link">Full timeline ↗</a>
+        </div>
+
+        <div class="feed">
+
+          <div class="feed-row alert">
+            <div class="agent-mark">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 13 V3 M2 13 H14"/><path d="M4 11 L7 7 L9 9 L13 4"/></svg>
+            </div>
+            <div>
+              <div class="feed-meta"><span class="agent">THE ANALYST</span><span class="time">· 11 min ago · NEW PATTERN</span></div>
+              <div class="feed-msg">
+                Detected a new pattern: your <strong>blood pressure spikes 2 hours after stimulant dose</strong> on 7 of the last 10 occurrences. <em>Worth surfacing</em> with your prescriber before the next adjustment.
+              </div>
+              <a href="#" class="feed-action">Review evidence →</a>
+            </div>
+          </div>
+
+          <div class="feed-row">
+            <div class="agent-mark">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 5 Q3 3 5 3 H11 Q13 3 13 5 V8 Q13 10 11 10 H8 L5 13 V10 Q3 10 3 8 Z"/></svg>
+            </div>
+            <div>
+              <div class="feed-meta"><span class="agent">THE TRANSLATOR</span><span class="time">· 1 hr ago · 3 ENTRIES</span></div>
+              <div class="feed-msg">
+                Parsed three check-ins from today — all confidence ≥ 0.92. Flagged <strong>"heel pain · idiopathic"</strong> as a new symptom-class for your review.
+              </div>
+            </div>
+          </div>
+
+          <div class="feed-row">
+            <div class="agent-mark">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="2"/><circle cx="8" cy="8" r="5" opacity=".6"/></svg>
+            </div>
+            <div>
+              <div class="feed-meta"><span class="agent">THE COORDINATOR</span><span class="time">· 4 hr ago · CHECK-IN</span></div>
+              <div class="feed-msg">
+                Sent your midday ping. You responded in 3 minutes — your fastest this week. Streak quietly continues at <strong>184 days</strong>.
+              </div>
+            </div>
+          </div>
+
+          <div class="feed-row">
+            <div class="agent-mark">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2 L13 5 V9 Q13 12, 8 14 Q3 12, 3 9 V5 Z"/><line x1="6" y1="7" x2="10" y2="7"/><line x1="6" y1="9" x2="10" y2="9"/></svg>
+            </div>
+            <div>
+              <div class="feed-meta"><span class="agent">THE ADVOCATE</span><span class="time">· yesterday · DRAFT READY</span></div>
+              <div class="feed-msg">
+                A rheumatology one-pager is drafted and waiting. It includes the new pain-cluster finding and the sleep-fragmentation correlation.
+              </div>
+              <a href="#" class="feed-action">Open draft →</a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+</div>
 </body>
 </html>
