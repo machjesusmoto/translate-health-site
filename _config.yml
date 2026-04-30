@@ -1,3 +1,10 @@
 title: Translate Health
 description: You talk. We translate. Doctors listen.
 theme: jekyll-theme-minimal
+exclude:
+  - components/
+  - deck-stage.js
+  - ios-frame.jsx
+  - claude-design-collateral/
+  - README.md
+  - SPEC-NEW-PAGES.md

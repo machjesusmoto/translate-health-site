@@ -1,0 +1,883 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Provider Visit Prep — Translate Health</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Geist:wght@300;400;450;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="styles.css" />
+
+<style>
+  /* ===== Page setup ===== */
+  body {
+    background: #ebe8e1;
+    font-family: var(--font-sans);
+    color: var(--ink-900);
+    padding: 48px 0;
+  }
+
+  .page {
+    width: 8.5in;
+    min-height: 11in;
+    margin: 0 auto;
+    background: var(--paper-card);
+    box-shadow: 0 30px 80px -30px rgba(26,58,27,0.30), 0 4px 12px rgba(26,58,27,0.06);
+    padding: 0.6in 0.6in 0.55in;
+    position: relative;
+    color: var(--ink-900);
+    font-size: 10.5pt;
+    line-height: 1.42;
+  }
+
+  /* ===== Header ===== */
+  .doc-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: flex-start;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--ink-900);
+    margin-bottom: 18px;
+  }
+  .doc-mark {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .doc-mark svg { color: var(--sage-700); }
+  .doc-mark .name {
+    font-family: var(--font-display);
+    font-size: 14pt;
+    font-weight: 420;
+    letter-spacing: -0.005em;
+  }
+  .doc-meta {
+    text-align: right;
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    letter-spacing: 0.06em;
+    color: var(--ink-400);
+  }
+  .doc-meta .doc-id { color: var(--ink-700); }
+
+  /* ===== Title block ===== */
+  .title-block {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    padding: 4px 0 18px;
+    border-bottom: 1px solid var(--ink-200);
+    margin-bottom: 18px;
+  }
+  .eyebrow-print {
+    font-family: var(--font-mono);
+    font-size: 8.5pt;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--sage-700);
+    font-weight: 500;
+  }
+  .doc-title {
+    font-family: var(--font-display);
+    font-size: 26pt;
+    font-weight: 380;
+    letter-spacing: -0.015em;
+    line-height: 1.05;
+    margin: 6px 0 0;
+    color: var(--ink-900);
+  }
+  .doc-title em { color: var(--sage-700); font-style: italic; font-weight: 360; }
+  .visit-meta {
+    font-family: var(--font-mono);
+    font-size: 9pt;
+    color: var(--ink-700);
+    text-align: right;
+    line-height: 1.6;
+  }
+  .visit-meta .label {
+    color: var(--ink-400);
+    text-transform: uppercase;
+    font-size: 7.5pt;
+    letter-spacing: 0.08em;
+  }
+
+  /* ===== Patient bar ===== */
+  .patient-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    background: var(--paper-deep);
+    border: 1px solid var(--ink-200);
+    border-radius: 4px;
+    padding: 12px 0;
+    margin-bottom: 22px;
+  }
+  .patient-bar .cell {
+    padding: 0 16px;
+    border-right: 1px solid rgba(45,45,45,0.10);
+  }
+  .patient-bar .cell:last-child { border-right: none; }
+  .patient-bar .label {
+    font-family: var(--font-mono);
+    font-size: 7.5pt;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-400);
+  }
+  .patient-bar .value {
+    font-family: var(--font-display);
+    font-size: 14pt;
+    font-weight: 420;
+    color: var(--ink-900);
+    margin-top: 2px;
+    letter-spacing: -0.005em;
+  }
+
+  /* ===== Section header ===== */
+  .sec {
+    margin-bottom: 22px;
+  }
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--ink-200);
+  }
+  .sec-num {
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    color: var(--coral-500);
+    letter-spacing: 0.08em;
+    font-weight: 600;
+  }
+  .sec-title {
+    font-family: var(--font-display);
+    font-size: 13pt;
+    font-weight: 460;
+    letter-spacing: -0.005em;
+    color: var(--ink-900);
+    margin: 0;
+    flex: 1;
+  }
+  .sec-aside {
+    font-family: var(--font-mono);
+    font-size: 8pt;
+    color: var(--ink-400);
+    letter-spacing: 0.06em;
+  }
+
+  /* ===== Flags ===== */
+  .flags {
+    display: grid;
+    gap: 6px;
+  }
+  .flag {
+    display: grid;
+    grid-template-columns: 78px 1fr auto;
+    gap: 14px;
+    align-items: center;
+    padding: 10px 14px;
+    border-radius: 4px;
+    border: 1px solid var(--ink-200);
+    background: var(--paper-card);
+  }
+  .flag.severe {
+    background: var(--coral-50);
+    border-color: var(--coral-200);
+  }
+  .flag.caution {
+    background: #fbf3e3;
+    border-color: #ecd9a8;
+  }
+  .flag.note {
+    background: var(--sage-50);
+    border-color: var(--sage-100);
+  }
+  .flag .pill-tag {
+    font-family: var(--font-mono);
+    font-size: 7.5pt;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 3px;
+    text-align: center;
+    color: var(--paper);
+  }
+  .flag.severe .pill-tag  { background: var(--coral-700); }
+  .flag.caution .pill-tag { background: #b48518; }
+  .flag.note .pill-tag    { background: var(--sage-700); }
+  .flag .flag-text { font-size: 10pt; color: var(--ink-900); }
+  .flag .flag-text strong { font-weight: 500; }
+  .flag .flag-meta {
+    font-family: var(--font-mono);
+    font-size: 8.5pt;
+    color: var(--ink-500);
+    white-space: nowrap;
+  }
+
+  /* ===== Two-column layout ===== */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 22px;
+  }
+
+  /* ===== Tables ===== */
+  table.data {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9.5pt;
+  }
+  table.data th {
+    text-align: left;
+    font-family: var(--font-mono);
+    font-size: 7.5pt;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-400);
+    font-weight: 500;
+    padding: 6px 8px;
+    border-bottom: 1px solid var(--ink-200);
+  }
+  table.data td {
+    padding: 8px 8px;
+    border-bottom: 1px solid rgba(45,45,45,0.06);
+    color: var(--ink-700);
+  }
+  table.data tr:last-child td { border-bottom: none; }
+  table.data .num {
+    font-family: var(--font-mono);
+    color: var(--ink-900);
+    text-align: right;
+  }
+  table.data .area {
+    font-weight: 500;
+    color: var(--ink-900);
+  }
+  .sev-bar {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sev-bar .track {
+    width: 64px;
+    height: 5px;
+    background: var(--paper-deep);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .sev-bar .fill {
+    height: 100%;
+    border-radius: 999px;
+    background: var(--sage-500);
+  }
+  .sev-bar .fill.high { background: var(--coral-500); }
+  .sev-bar .fill.mid  { background: #c98a3a; }
+
+  /* ===== Sleep card ===== */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--ink-200);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .stat-grid .stat {
+    padding: 12px 14px;
+    border-right: 1px solid var(--ink-200);
+  }
+  .stat-grid .stat:last-child { border-right: none; }
+  .stat .lbl {
+    font-family: var(--font-mono);
+    font-size: 7.5pt;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-400);
+  }
+  .stat .val {
+    font-family: var(--font-display);
+    font-size: 22pt;
+    font-weight: 380;
+    color: var(--ink-900);
+    line-height: 1;
+    margin-top: 4px;
+    letter-spacing: -0.01em;
+  }
+  .stat .val .unit { font-size: 11pt; color: var(--ink-500); margin-left: 2px; }
+  .stat .delta {
+    font-family: var(--font-mono);
+    font-size: 8.5pt;
+    margin-top: 4px;
+    color: var(--ink-500);
+  }
+  .stat .delta.warn { color: var(--coral-700); }
+
+  /* Sleep histogram */
+  .sleep-hist {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    margin-top: 14px;
+    padding: 12px 14px;
+    background: var(--paper-deep);
+    border: 1px solid var(--ink-200);
+    border-radius: 4px;
+  }
+  .sleep-hist .row-l {
+    display: grid;
+    grid-template-columns: 50px 1fr 36px;
+    gap: 10px;
+    align-items: center;
+    font-size: 9pt;
+  }
+  .sleep-hist .lbl { font-family: var(--font-mono); font-size: 8pt; color: var(--ink-500); }
+  .sleep-hist .num { font-family: var(--font-mono); font-size: 8pt; color: var(--ink-700); text-align: right; }
+  .sleep-hist .bar {
+    height: 6px;
+    background: var(--paper-card);
+    border: 1px solid var(--ink-200);
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .sleep-hist .bar .fill {
+    height: 100%;
+    background: var(--sage-500);
+    border-radius: 999px;
+  }
+  .sleep-hist .bar .fill.warn { background: var(--coral-500); }
+
+  /* ===== Correlation callout ===== */
+  .callout {
+    background: var(--sage-700);
+    color: var(--paper);
+    border-radius: 4px;
+    padding: 18px 22px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 18px;
+    align-items: center;
+    margin-bottom: 22px;
+  }
+  .callout .ico {
+    width: 38px; height: 38px;
+    border-radius: 999px;
+    background: rgba(250,248,245,0.10);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .callout .lead-line {
+    font-family: var(--font-mono);
+    font-size: 7.5pt;
+    letter-spacing: 0.10em;
+    color: rgba(250,248,245,0.6);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .callout .body {
+    font-family: var(--font-display);
+    font-size: 13pt;
+    line-height: 1.3;
+    font-weight: 380;
+  }
+  .callout .body em {
+    color: var(--coral-200);
+    font-style: italic;
+    font-weight: 460;
+  }
+  .callout .multiplier {
+    font-family: var(--font-display);
+    font-size: 32pt;
+    font-weight: 360;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: var(--coral-200);
+  }
+  .callout .multiplier .x {
+    font-size: 14pt;
+    color: rgba(243,200,187,0.7);
+    margin-left: 2px;
+  }
+
+  /* ===== BP table specific ===== */
+  .bp-row .reading {
+    font-family: var(--font-mono);
+    font-size: 10pt;
+    color: var(--ink-900);
+  }
+  .bp-row .reading .sep { color: var(--ink-400); }
+  .bp-row .tag {
+    font-family: var(--font-mono);
+    font-size: 7.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+  .bp-row .tag.normal { background: var(--sage-50); color: var(--sage-900); }
+  .bp-row .tag.elev   { background: #fbf3e3; color: #6e4f0f; }
+  .bp-row .tag.high   { background: var(--coral-50); color: var(--coral-700); }
+
+  /* ===== Notable events ===== */
+  .events {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--ink-200);
+  }
+  .event {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(45,45,45,0.06);
+  }
+  .event .when {
+    font-family: var(--font-mono);
+    font-size: 8.5pt;
+    color: var(--ink-500);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .event .what {
+    font-size: 10pt;
+    color: var(--ink-900);
+  }
+  .event .what .quote {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--ink-700);
+    display: block;
+    margin-top: 2px;
+    font-size: 9.5pt;
+  }
+
+  /* ===== Questions ===== */
+  .questions {
+    display: grid;
+    gap: 8px;
+  }
+  .q {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 10px;
+    align-items: start;
+    padding: 10px 12px;
+    background: var(--paper-deep);
+    border-left: 2px solid var(--sage-500);
+    border-radius: 0 4px 4px 0;
+  }
+  .q .num {
+    font-family: var(--font-mono);
+    font-size: 9pt;
+    color: var(--sage-700);
+    font-weight: 500;
+  }
+  .q .body {
+    font-family: var(--font-display);
+    font-size: 10.5pt;
+    color: var(--ink-900);
+    font-weight: 400;
+    line-height: 1.4;
+  }
+  .q .body .hint {
+    display: block;
+    margin-top: 3px;
+    font-family: var(--font-sans);
+    font-size: 9pt;
+    color: var(--ink-500);
+    font-style: normal;
+  }
+
+  /* ===== Footer ===== */
+  .doc-footer {
+    margin-top: 28px;
+    padding-top: 12px;
+    border-top: 1px solid var(--ink-200);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 7.5pt;
+    color: var(--ink-400);
+    letter-spacing: 0.04em;
+  }
+  .doc-footer .left { display: flex; gap: 16px; }
+  .doc-footer .right { font-style: italic; }
+
+  /* ===== Print ===== */
+  @media print {
+    @page { size: letter; margin: 0.4in; }
+    body { background: white; padding: 0; }
+    .page { box-shadow: none; margin: 0; padding: 0; width: 100%; min-height: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- Logo / brand strip -->
+  <div class="doc-header">
+    <div class="doc-mark">
+      <svg width="22" height="22" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <path d="M6 11 C 6 7, 10 5, 14 7 L 14 11" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" />
+        <path d="M18 21 L 18 25 C 22 27, 26 25, 26 21" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" />
+        <circle cx="10" cy="16" r="1.6" fill="currentColor" />
+        <circle cx="16" cy="16" r="1.6" fill="currentColor" />
+        <circle cx="22" cy="16" r="1.6" fill="currentColor" />
+      </svg>
+      <span class="name">Translate Health</span>
+    </div>
+    <div class="doc-meta">
+      <div class="doc-id">DOC-PVP-04826</div>
+      <div>GENERATED · APR 26 2026 · 6:42 PM PT</div>
+      <div>BY · THE ADVOCATE</div>
+    </div>
+  </div>
+
+  <!-- Title -->
+  <div class="title-block">
+    <div>
+      <div class="eyebrow-print">Provider Visit Prep · Primary Care</div>
+      <h1 class="doc-title">Two weeks at a glance,<br /><em>before the fifteen-minute visit.</em></h1>
+    </div>
+    <div class="visit-meta">
+      <div><span class="label">Visit</span><br />Annual physical · 30 min</div>
+      <div style="margin-top:8px;"><span class="label">When</span><br />Thu · Apr 30 · 10:30 am</div>
+    </div>
+  </div>
+
+  <!-- Patient bar -->
+  <div class="patient-bar">
+    <div class="cell">
+      <div class="label">Patient</div>
+      <div class="value">[ Patient Name ]</div>
+    </div>
+    <div class="cell">
+      <div class="label">Date range</div>
+      <div class="value">Apr 12 – Apr 26</div>
+    </div>
+    <div class="cell">
+      <div class="label">Days tracked</div>
+      <div class="value">14 / 14</div>
+    </div>
+    <div class="cell">
+      <div class="label">Provider</div>
+      <div class="value">Dr. M. Hadley · MD</div>
+    </div>
+  </div>
+
+  <!-- KEY FLAGS -->
+  <section class="sec">
+    <div class="sec-head">
+      <span class="sec-num">§ 01</span>
+      <h2 class="sec-title">Key flags</h2>
+      <span class="sec-aside">Three items surfaced by the Analyst</span>
+    </div>
+    <div class="flags">
+      <div class="flag severe">
+        <span class="pill-tag">Severe</span>
+        <span class="flag-text"><strong>Heel pain — 4 episodes at 8/10 or higher</strong> over 14 days, all lasting &gt; 30 min. No activity trigger identified across any episode.</span>
+        <span class="flag-meta">Δ +3 vs prior period</span>
+      </div>
+      <div class="flag caution">
+        <span class="pill-tag">Caution</span>
+        <span class="flag-text"><strong>Sleep avg 5.5 h</strong>, down from 6.4 h prior period. Five nights under 5 h. Fatigue does not correlate with duration — likely quality issue.</span>
+        <span class="flag-meta">Δ −0.9 h</span>
+      </div>
+      <div class="flag note">
+        <span class="pill-tag">Note</span>
+        <span class="flag-text"><strong>BP elevated post-stimulant</strong> on 8 of 12 measured mornings (avg +14 systolic, ~2 h after dose). Consistent timing pattern.</span>
+        <span class="flag-meta">r = 0.71</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TWO COL: BP + Sleep -->
+  <section class="sec">
+    <div class="two-col">
+      <!-- BP -->
+      <div>
+        <div class="sec-head">
+          <span class="sec-num">§ 02</span>
+          <h2 class="sec-title">Blood pressure</h2>
+          <span class="sec-aside">12 readings · 14 days</span>
+        </div>
+        <table class="data">
+          <thead>
+            <tr><th>Date</th><th>Reading</th><th>Pulse</th><th>Context</th><th></th></tr>
+          </thead>
+          <tbody>
+            <tr class="bp-row">
+              <td class="num">Apr 26</td>
+              <td class="reading">142<span class="sep">/</span>91</td>
+              <td class="num">78</td>
+              <td>+2h post-stim</td>
+              <td><span class="tag high">High</span></td>
+            </tr>
+            <tr class="bp-row">
+              <td class="num">Apr 24</td>
+              <td class="reading">138<span class="sep">/</span>88</td>
+              <td class="num">74</td>
+              <td>+2h post-stim</td>
+              <td><span class="tag elev">Elev</span></td>
+            </tr>
+            <tr class="bp-row">
+              <td class="num">Apr 22</td>
+              <td class="reading">122<span class="sep">/</span>78</td>
+              <td class="num">68</td>
+              <td>baseline am</td>
+              <td><span class="tag normal">Normal</span></td>
+            </tr>
+            <tr class="bp-row">
+              <td class="num">Apr 19</td>
+              <td class="reading">144<span class="sep">/</span>92</td>
+              <td class="num">80</td>
+              <td>+2h post-stim</td>
+              <td><span class="tag high">High</span></td>
+            </tr>
+            <tr class="bp-row">
+              <td class="num">Apr 16</td>
+              <td class="reading">119<span class="sep">/</span>76</td>
+              <td class="num">66</td>
+              <td>baseline pm</td>
+              <td><span class="tag normal">Normal</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="margin-top: 10px; padding: 10px 12px; background: var(--paper-deep); border-radius: 4px; font-size: 9pt; color: var(--ink-700); line-height: 1.5;">
+          <span style="font-family: var(--font-mono); font-size: 7.5pt; letter-spacing: 0.08em; color: var(--ink-400); text-transform: uppercase;">Range</span><br />
+          Systolic <span style="font-family: var(--font-mono); color: var(--ink-900);">119 – 144</span> · Diastolic <span style="font-family: var(--font-mono); color: var(--ink-900);">76 – 92</span> · 5 of 12 elevated or higher
+        </div>
+      </div>
+
+      <!-- Sleep -->
+      <div>
+        <div class="sec-head">
+          <span class="sec-num">§ 03</span>
+          <h2 class="sec-title">Sleep summary</h2>
+          <span class="sec-aside">14 nights tracked</span>
+        </div>
+        <div class="stat-grid">
+          <div class="stat">
+            <div class="lbl">Average</div>
+            <div class="val">5.5<span class="unit">h</span></div>
+            <div class="delta warn">↓ 0.9h vs prior</div>
+          </div>
+          <div class="stat">
+            <div class="lbl">Nights recorded</div>
+            <div class="val">14<span class="unit">/14</span></div>
+            <div class="delta">100% adherence</div>
+          </div>
+          <div class="stat">
+            <div class="lbl">Nights &lt; 5h</div>
+            <div class="val">5</div>
+            <div class="delta warn">36% of nights</div>
+          </div>
+        </div>
+
+        <div class="sleep-hist">
+          <div class="row-l">
+            <span class="lbl">8h+</span>
+            <div class="bar"><div class="fill" style="width: 7%"></div></div>
+            <span class="num">1</span>
+          </div>
+          <div class="row-l">
+            <span class="lbl">6 – 7h</span>
+            <div class="bar"><div class="fill" style="width: 28%"></div></div>
+            <span class="num">4</span>
+          </div>
+          <div class="row-l">
+            <span class="lbl">5 – 6h</span>
+            <div class="bar"><div class="fill" style="width: 28%"></div></div>
+            <span class="num">4</span>
+          </div>
+          <div class="row-l">
+            <span class="lbl">4 – 5h</span>
+            <div class="bar"><div class="fill warn" style="width: 28%"></div></div>
+            <span class="num">4</span>
+          </div>
+          <div class="row-l">
+            <span class="lbl">&lt; 4h</span>
+            <div class="bar"><div class="fill warn" style="width: 7%"></div></div>
+            <span class="num">1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAIN BY LOCATION -->
+  <section class="sec">
+    <div class="sec-head">
+      <span class="sec-num">§ 04</span>
+      <h2 class="sec-title">Pain by location</h2>
+      <span class="sec-aside">17 episodes · 14 days · severity 1–10</span>
+    </div>
+    <table class="data">
+      <thead>
+        <tr>
+          <th style="width: 22%;">Area</th>
+          <th style="width: 28%;">Avg severity</th>
+          <th style="width: 14%;">Range</th>
+          <th style="width: 12%;">Reports</th>
+          <th>Pattern</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="area">Right heel</td>
+          <td>
+            <span class="sev-bar">
+              <span class="track"><span class="fill high" style="width: 78%"></span></span>
+              <span class="num">7.8</span>
+            </span>
+          </td>
+          <td class="num">5 – 9</td>
+          <td class="num">7</td>
+          <td>No activity link · onset random</td>
+        </tr>
+        <tr>
+          <td class="area">Left knee</td>
+          <td>
+            <span class="sev-bar">
+              <span class="track"><span class="fill mid" style="width: 56%"></span></span>
+              <span class="num">5.6</span>
+            </span>
+          </td>
+          <td class="num">4 – 7</td>
+          <td class="num">5</td>
+          <td>Worse mornings after &lt; 5h sleep</td>
+        </tr>
+        <tr>
+          <td class="area">Lower back</td>
+          <td>
+            <span class="sev-bar">
+              <span class="track"><span class="fill" style="width: 42%"></span></span>
+              <span class="num">4.2</span>
+            </span>
+          </td>
+          <td class="num">3 – 6</td>
+          <td class="num">3</td>
+          <td>Late afternoon, desk-correlated</td>
+        </tr>
+        <tr>
+          <td class="area">Hands · diffuse</td>
+          <td>
+            <span class="sev-bar">
+              <span class="track"><span class="fill" style="width: 35%"></span></span>
+              <span class="num">3.5</span>
+            </span>
+          </td>
+          <td class="num">2 – 5</td>
+          <td class="num">2</td>
+          <td>Cold mornings only</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CORRELATION CALLOUT -->
+  <div class="callout">
+    <div class="ico">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M4 20 V4 M4 20 H20" stroke="var(--paper)" stroke-width="1.6" stroke-linecap="round" />
+        <path d="M7 16 L11 12 L13 14 L17 8" stroke="var(--coral-200)" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
+    <div>
+      <div class="lead-line">Correlation flag · The Analyst</div>
+      <div class="body">Nights with <em>3+ interruptions</em> precede next-day pain episodes <em>2.3× more often</em> than uninterrupted nights. <span style="color: rgba(250,248,245,0.7); font-size: 10pt; display: block; margin-top: 4px;">9 of 12 high-severity heel-pain episodes followed such nights. Sleep <em>quality</em>, not duration, appears to drive the pattern.</span></div>
+    </div>
+    <div class="multiplier">2.3<span class="x">×</span></div>
+  </div>
+
+  <!-- TWO COL: Notable events + Questions -->
+  <div class="two-col">
+    <!-- NOTABLE EVENTS -->
+    <section class="sec" style="margin-bottom: 0;">
+      <div class="sec-head">
+        <span class="sec-num">§ 05</span>
+        <h2 class="sec-title">Notable events</h2>
+        <span class="sec-aside">Worth mentioning</span>
+      </div>
+      <div class="events">
+        <div class="event">
+          <span class="when">Apr 25 · 9:14 pm</span>
+          <span class="what">New onset — sharp left wrist pain.<span class="quote">"sharp pain just started in left wrist, 7/10, no idea why"</span></span>
+        </div>
+        <div class="event">
+          <span class="when">Apr 22 · 6:30 am</span>
+          <span class="what">Skipped morning stimulant. BP read normal. Reported "foggy" but no pain spike that day.</span>
+        </div>
+        <div class="event">
+          <span class="when">Apr 19 · 3:00 am</span>
+          <span class="what">Woken by heel pain (9/10). First mid-sleep episode in tracking history.</span>
+        </div>
+        <div class="event">
+          <span class="when">Apr 16 · all day</span>
+          <span class="what">Best day: 7.4 h sleep, no pain, BP normal. Patient note: <em>"first day in weeks I felt like myself."</em></span>
+        </div>
+        <div class="event">
+          <span class="when">Apr 14 · 11:00 am</span>
+          <span class="what">Started new magnesium glycinate (400 mg, evenings). No clear effect on sleep yet.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUESTIONS -->
+    <section class="sec" style="margin-bottom: 0;">
+      <div class="sec-head">
+        <span class="sec-num">§ 06</span>
+        <h2 class="sec-title">Questions for Dr. Hadley</h2>
+        <span class="sec-aside">Patient-prepared</span>
+      </div>
+      <div class="questions">
+        <div class="q">
+          <span class="num">01</span>
+          <div class="body">
+            What workup makes sense for the heel pain pattern?
+            <span class="hint">No injury, no activity link, episodes at rest. Is podiatry or rheum the next stop?</span>
+          </div>
+        </div>
+        <div class="q">
+          <span class="num">02</span>
+          <div class="body">
+            Is the post-stimulant BP pattern clinically concerning?
+            <span class="hint">Should we adjust dose, timing, or check off-stimulant baseline more rigorously?</span>
+          </div>
+        </div>
+        <div class="q">
+          <span class="num">03</span>
+          <div class="body">
+            Sleep quality intervention — sleep study, or trial something first?
+            <span class="hint">Average is 5.5 h but the bigger issue is fragmentation and fatigue-despite-sleep.</span>
+          </div>
+        </div>
+        <div class="q">
+          <span class="num">04</span>
+          <div class="body">
+            Any labs worth ordering before the rheum referral?
+            <span class="hint">Last full panel was October. CRP / ESR / CBC if there's a rheum question?</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="doc-footer">
+    <div class="left">
+      <span>TRANSLATE HEALTH · ADVOCATE REPORT</span>
+      <span>v 0.1.0</span>
+    </div>
+    <div class="right">Generated from 14 days of conversational check-ins · The patient reviewed every extracted field</div>
+  </footer>
+
+</div>
+
+</body>
+</html>

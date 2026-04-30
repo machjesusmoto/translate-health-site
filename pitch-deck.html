@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Translate Health — Pitch Deck</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Geist:wght@300;400;450;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="styles.css" />
+
+<style>
+  body { background: #1a1a1a; }
+
+  deck-stage > section {
+    width: 1920px; height: 1080px;
+    background: var(--paper);
+    color: var(--ink-900);
+    font-family: var(--font-sans);
+    position: relative;
+    overflow: hidden;
+    padding: 96px 128px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Eyebrow used across slides */
+  .deck-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--sage-700);
+    font-weight: 500;
+  }
+
+  /* Slide chrome */
+  .slide-head {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 0;
+  }
+  .slide-mark {
+    display: flex; align-items: center; gap: 14px;
+    color: var(--ink-900);
+  }
+  .slide-mark .name {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 420;
+    letter-spacing: -0.005em;
+  }
+  .slide-foot {
+    margin-top: auto;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--ink-400);
+    letter-spacing: 0.04em;
+    padding-top: 32px;
+  }
+
+  /* Display type */
+  .deck-h1 {
+    font-family: var(--font-display);
+    font-weight: 360;
+    letter-spacing: -0.022em;
+    line-height: 1.0;
+    color: var(--ink-900);
+    margin: 0;
+  }
+  .deck-h1 em { color: var(--sage-700); font-style: italic; font-weight: 340; }
+  .deck-h2 {
+    font-family: var(--font-display);
+    font-weight: 380;
+    letter-spacing: -0.012em;
+    line-height: 1.05;
+    color: var(--ink-900);
+    margin: 0;
+  }
+  .deck-h2 em { color: var(--sage-700); font-style: italic; font-weight: 360; }
+  .deck-lead {
+    font-family: var(--font-sans);
+    font-size: 24px;
+    line-height: 1.5;
+    color: var(--ink-500);
+    max-width: 900px;
+    font-weight: 400;
+  }
+
+  /* === SLIDE 1: TITLE === */
+  .s1 {
+    background:
+      radial-gradient(circle at 88% 10%, rgba(155,179,156,0.30), transparent 55%),
+      radial-gradient(circle at 12% 95%, rgba(224,122,95,0.10), transparent 55%),
+      var(--paper);
+    justify-content: space-between;
+  }
+  .s1 .center {
+    flex: 1; display: flex; flex-direction: column; justify-content: center;
+  }
+  .s1 .pre {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sage-700);
+    margin-bottom: 36px;
+  }
+  .s1 .deck-h1 {
+    font-size: 220px;
+    line-height: 0.92;
+  }
+  .s1 .tag {
+    font-family: var(--font-display);
+    font-size: 38px;
+    line-height: 1.2;
+    color: var(--ink-700);
+    margin-top: 48px;
+    font-weight: 380;
+    letter-spacing: -0.01em;
+  }
+  .s1 .tag em { color: var(--sage-700); font-style: italic; font-weight: 360; }
+  .s1 .sub {
+    font-size: 24px;
+    color: var(--ink-500);
+    margin-top: 24px;
+    font-weight: 450;
+  }
+
+  /* === SLIDE 2: PROBLEM === */
+  .crisis-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .crisis {
+    background: var(--paper-card);
+    border: 1px solid rgba(45,45,45,0.08);
+    border-radius: 20px;
+    padding: 48px 44px;
+    box-shadow: var(--shadow-card);
+    display: flex; flex-direction: column; gap: 24px;
+    min-height: 540px;
+  }
+  .crisis .num {
+    font-family: var(--font-display);
+    font-size: 64px;
+    color: var(--coral-500);
+    font-style: italic;
+    font-weight: 360;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .crisis .lbl {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--ink-400);
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+  }
+  .crisis .quote {
+    font-family: var(--font-display);
+    font-size: 38px;
+    font-style: italic;
+    color: var(--ink-900);
+    font-weight: 380;
+    line-height: 1.2;
+    letter-spacing: -0.012em;
+  }
+  .crisis .body {
+    font-size: 19px;
+    color: var(--ink-500);
+    line-height: 1.55;
+    margin-top: auto;
+  }
+
+  /* === SLIDE 3: SOLUTION === */
+  .s3-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 80px;
+    flex: 1;
+    align-items: center;
+  }
+  .agents-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+  .agent-tile {
+    background: var(--paper-card);
+    border: 1px solid rgba(45,45,45,0.08);
+    border-radius: 14px;
+    padding: 22px 18px;
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    text-align: center;
+    color: var(--sage-700);
+    box-shadow: var(--shadow-card);
+  }
+  .agent-tile.featured { background: var(--sage-700); color: var(--paper); border-color: var(--sage-700); grid-column: span 2; flex-direction: row; padding: 28px; gap: 20px; align-items: center; text-align: left; }
+  .agent-tile .num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.10em;
+    color: currentColor;
+    opacity: 0.55;
+  }
+  .agent-tile .nm {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 460;
+    letter-spacing: -0.005em;
+    color: var(--ink-900);
+  }
+  .agent-tile.featured .nm { color: var(--paper); font-size: 26px; }
+  .agent-tile .desc {
+    font-size: 13px;
+    color: var(--ink-500);
+    line-height: 1.4;
+  }
+  .agent-tile.featured .desc { color: rgba(250,248,245,0.78); font-size: 15px; }
+
+  /* fake screenshot */
+  .product-shot {
+    background: var(--paper-card);
+    border: 1px solid rgba(45,45,45,0.10);
+    border-radius: 18px;
+    box-shadow: var(--shadow-pop);
+    padding: 36px 36px 32px;
+    position: relative;
+  }
+  .product-shot .ss-head {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding-bottom: 18px; border-bottom: 1px solid rgba(45,45,45,0.08);
+    margin-bottom: 20px;
+  }
+  .product-shot .ss-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 420;
+    color: var(--ink-900);
+    letter-spacing: -0.01em;
+  }
+  .product-shot .ss-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-400);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .product-shot .metrics {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    margin-bottom: 22px;
+  }
+  .product-shot .metric .lbl {
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-400);
+  }
+  .product-shot .metric .val {
+    font-family: var(--font-display); font-size: 36px; font-weight: 380;
+    letter-spacing: -0.01em; line-height: 1; margin-top: 4px; color: var(--ink-900);
+  }
+  .product-shot .metric .delta { font-family: var(--font-mono); font-size: 12px; color: var(--coral-700); margin-top: 6px; }
+  .product-shot .chart {
+    height: 90px;
+    background: linear-gradient(to top, var(--sage-50), transparent);
+    border-radius: 8px;
+    position: relative;
+    margin-bottom: 16px;
+  }
+  .product-shot .insight {
+    background: var(--paper-deep);
+    border-left: 3px solid var(--coral-500);
+    padding: 14px 18px;
+    border-radius: 0 8px 8px 0;
+    font-family: var(--font-display);
+    font-size: 17px;
+    line-height: 1.4;
+    color: var(--ink-900);
+    font-weight: 380;
+  }
+  .product-shot .insight em { color: var(--coral-500); font-style: italic; font-weight: 460; }
+
+  /* === SLIDE 4: TRACTION === */
+  .traction-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+    margin: auto 0;
+  }
+  .stat-big {
+    border-top: 1px solid var(--ink-200);
+    padding-top: 32px;
+  }
+  .stat-big .lbl {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--ink-400);
+    margin-bottom: 16px;
+  }
+  .stat-big .val {
+    font-family: var(--font-display);
+    font-size: 144px;
+    line-height: 0.95;
+    font-weight: 360;
+    letter-spacing: -0.025em;
+    color: var(--sage-700);
+  }
+  .stat-big .val .unit {
+    font-size: 56px;
+    color: var(--ink-500);
+    font-weight: 360;
+    margin-left: 8px;
+  }
+  .stat-big .body {
+    font-size: 19px;
+    color: var(--ink-500);
+    line-height: 1.5;
+    margin-top: 18px;
+    max-width: 32ch;
+  }
+
+  /* === SLIDE 5: VISION === */
+  .flow-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: auto;
+    margin-bottom: 32px;
+  }
+  .flow-step {
+    background: var(--paper-card);
+    border: 1px solid rgba(45,45,45,0.08);
+    border-radius: 18px;
+    padding: 36px 32px;
+    box-shadow: var(--shadow-card);
+    position: relative;
+    min-height: 260px;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .flow-step .icon {
+    width: 56px; height: 56px;
+    border-radius: 14px;
+    background: var(--sage-50);
+    border: 1px solid var(--sage-100);
+    color: var(--sage-700);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .flow-step .stepnum {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-400);
+    letter-spacing: 0.10em;
+  }
+  .flow-step .title {
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 380;
+    letter-spacing: -0.01em;
+    color: var(--ink-900);
+  }
+  .flow-step .body {
+    font-size: 16px; color: var(--ink-500); line-height: 1.5;
+  }
+  .arrow-between {
+    position: absolute; right: -12px; top: 64px;
+    color: var(--sage-300); font-size: 24px; font-family: var(--font-mono);
+  }
+
+  /* === SLIDE 6: ASK === */
+  .s6 {
+    background: var(--sage-900);
+    color: var(--paper);
+  }
+  .s6 .deck-eyebrow { color: var(--coral-200); }
+  .s6 .deck-h1 { color: var(--paper); }
+  .s6 .deck-h1 em { color: var(--coral-500); font-weight: 360; }
+  .s6 .ask-lead {
+    font-family: var(--font-display);
+    font-size: 32px;
+    color: rgba(250,248,245,0.78);
+    line-height: 1.4;
+    max-width: 1200px;
+    margin-top: 36px;
+    font-weight: 380;
+  }
+  .s6 .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin-top: auto;
+    border-top: 1px solid rgba(250,248,245,0.18);
+    padding-top: 40px;
+  }
+  .s6 .contact-grid .cell {
+    border-right: 1px solid rgba(250,248,245,0.18);
+    padding: 0 32px 0 0;
+  }
+  .s6 .contact-grid .cell:last-child { border-right: none; padding-right: 0; }
+  .s6 .contact-grid .lbl {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--coral-200);
+    margin-bottom: 14px;
+  }
+  .s6 .contact-grid .val {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    color: var(--paper);
+  }
+  .s6 .slide-mark, .s6 .slide-foot { color: var(--paper); }
+  .s6 .slide-foot { color: rgba(250,248,245,0.55); }
+  .s6 .slide-mark { color: var(--paper); }
+</style>
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+
+<!-- ============== SLIDE 1: TITLE ============== -->
+<section data-screen-label="01 Title" class="s1">
+  <div class="slide-head">
+    <div class="slide-mark">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <path d="M6 11 C 6 7, 10 5, 14 7 L 14 11" stroke="var(--sage-700)" stroke-width="1.6" fill="none" stroke-linecap="round" />
+        <path d="M18 21 L 18 25 C 22 27, 26 25, 26 21" stroke="var(--sage-700)" stroke-width="1.6" fill="none" stroke-linecap="round" />
+        <circle cx="10" cy="16" r="1.6" fill="var(--sage-700)" />
+        <circle cx="16" cy="16" r="1.6" fill="var(--sage-700)" />
+        <circle cx="22" cy="16" r="1.6" fill="var(--sage-700)" />
+      </svg>
+      <span class="name">Translate Health</span>
+    </div>
+    <span class="deck-eyebrow">Founding 500 · Pitch · 2026</span>
+  </div>
+
+  <div class="center">
+    <div class="pre">A health intelligence team for the chronically ill</div>
+    <h1 class="deck-h1">Translate<br /><em>Health.</em></h1>
+    <p class="tag">You talk. <em>We translate.</em> Doctors listen.</p>
+    <p class="sub">AI Health Coordination for Chronic Illness</p>
+  </div>
+
+  <div class="slide-foot">
+    <span>01 · TITLE</span>
+    <span>translatehealth.ai</span>
+  </div>
+</section>
+
+<!-- ============== SLIDE 2: PROBLEM ============== -->
+<section data-screen-label="02 Problem">
+  <div class="slide-head">
+    <div class="slide-mark">
+      <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+        <path d="M6 11 C 6 7, 10 5, 14 7 L 14 11" stroke="var(--sage-700)" stroke-width="1.6" fill="none" stroke-linecap="round" />
+        <path d="M18 21 L 18 25 C 22 27, 26 25, 26 21" stroke="var(--sage-700)" stroke-width="1.6" fill="none" stroke-linecap="round" />
+        <circle cx="10" cy="16" r="1.6" fill="var(--sage-700)" /><circle cx="16" cy="16" r="1.6" fill="var(--sage-700)" /><circle cx="22" cy="16" r="1.6" fill="var(--sage-700)" />
+      </svg>
+      <span class="name" style="font-size:18px">Translate Health</span>
+    </div>
+    <span class="deck-eyebrow" style="color: var(--coral-500);">02 · The problem</span>
+  </div>
+
+  <div style="margin-top: 56px; max-width: 1400px;">
+    <h2 class="deck-h2" style="font-size: 96px;">Chronic illness has three<br /><em style="color: var(--coral-500);">invisible crises.</em></h2>
+  </div>
+
+  <div class="crisis-grid">
+    <div class="crisis">
+      <div style="display:flex;align-items:baseline;gap:18px;">
+        <span class="num">I.</span>
+        <span class="lbl">Memory</span>
+      </div>
+      <div class="quote">"How long has this been going on?"</div>
+      <div class="body">And you can't remember. The honest answer is months, but the dates, the patterns, the start — gone in the appointment haze.</div>
+    </div>
+    <div class="crisis">
+      <div style="display:flex;align-items:baseline;gap:18px;">
+        <span class="num">II.</span>
+        <span class="lbl">Communication</span>
+      </div>
+      <div class="quote">"It hurts a lot."</div>
+      <div class="body">Doesn't convey severity, pattern, or impact. Fifteen minutes rarely leave room to translate experience into clinical signal.</div>
+    </div>
+    <div class="crisis">
+      <div style="display:flex;align-items:baseline;gap:18px;">
+        <span class="num">III.</span>
+        <span class="lbl">Coordination</span>
+      </div>
+      <div class="quote">"Did you tell rheumatology?"</div>
+      <div class="body">Multiple providers, scattered records, no one sees the whole picture. You become the unpaid integration layer for your own body.</div>
+    </div>
+  </div>
+
+  <div class="slide-foot">
+    <span>02 · THE PROBLEM</span>
+    <span>02 / 06</span>
+  </div>
+</section>
+
+<!-- ============== SLIDE 3: SOLUTION ============== -->
+<section data-screen-label="03 Solution">
+  <div class="slide-head">
+    <div class="slide-mark">
+      <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+        <path d="M6 11 C 6 7, 10 5, 14 7 L 14 11" stroke="var(--sage-700)" stroke-width="1.6" fill="none" stroke-linecap="round" />
+        <path d="M18 21 L 18 25 C 22 27, 26 25, 26 21" stroke="var(--sage-700)" stroke-width="1.6" fill="none" stroke-linecap="round" />
+        <circle cx="10" cy="16" r="1.6" fill="var(--sage-700)" /><circle cx="16" cy="16" r="1.6" fill="var(--sage-700)" /><circle cx="22" cy="16" r="1.6" fill="var(--sage-700)" />
+      </svg>
+      <span class="name" style="font-size:18px">Translate Health</span>
+    </div>
+    <span class="deck-eyebrow">03 · The solution</span>
+  </div>
+
+  <div style="margin-top: 48px;">
+    <h2 class="deck-h2" style="font-size: 88px;">Seven agents.<br /><em>One health intelligence team.</em></h2>
+  </div>
+
+  <div class="s3-grid" style="margin-top: 56px;">
+    <div>
+      <div class="agents-grid">
+        <div class="agent-tile featured">
+          <svg width="56" height="56" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.4">
+            <path d="M8 44 V12 M8 44 H48" stroke-linecap="round" />
+            <circle cx="14" cy="36" r="1.6" fill="currentColor" stroke="none" /><circle cx="20" cy="32" r="1.6" fill="currentColor" stroke="none" /><circle cx="26" cy="26" r="1.6" fill="currentColor" stroke="none" /><circle cx="32" cy="22" r="1.6" fill="currentColor" stroke="none" /><circle cx="38" cy="18" r="1.6" fill="currentColor" stroke="none" /><circle cx="44" cy="14" r="1.6" fill="currentColor" stroke="none" />
+            <path d="M11 38 L46 14" opacity="0.4" />
+          </svg>
+          <div>
+            <div class="num" style="color: rgba(250,248,245,0.6);">03 · FEATURED</div>
+            <div class="nm">The Analyst</div>
+            <div class="desc">Cross-correlates sleep → next-day pain, medication timing, weather. Surfaces the patterns no human spots.</div>
+          </div>
+        </div>
+        <div class="agent-tile">
+          <svg width="40" height="40" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="28" cy="28" r="6" /><circle cx="28" cy="28" r="13" opacity=".55"/><circle cx="28" cy="28" r="20" opacity=".25"/><circle cx="28" cy="28" r="2" fill="currentColor" stroke="none" /></svg>
+          <div class="num">01</div>
+          <div class="nm">Coordinator</div>
+          <div class="desc">Keeps you on track</div>
+        </div>
+        <div class="agent-tile">
+          <svg width="40" height="40" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.4">
+            <path d="M8 16 Q8 11, 13 11 H22 Q27 11, 27 16 V22 Q27 27, 22 27 H17 L13 31 V27 Q8 27, 8 22 Z" />
+            <rect x="32" y="14" width="16" height="3" rx="1" /><rect x="32" y="22" width="11" height="3" rx="1" /><rect x="32" y="30" width="14" height="3" rx="1" />
+          </svg>
+          <div class="num">02</div>
+          <div class="nm">Translator</div>
+          <div class="desc">Words → structured data</div>
+        </div>
+        <div class="agent-tile">
+          <svg width="40" height="40" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.4">
+            <rect x="10" y="10" width="26" height="34" rx="2" /><path d="M16 22 L20 18 L24 23 L28 16 L32 21" /><line x1="16" y1="32" x2="30" y2="32" /><line x1="16" y1="37" x2="26" y2="37" />
+          </svg>
+          <div class="num">04</div>
+          <div class="nm">Storyteller</div>
+          <div class="desc">Your week in review</div>
+        </div>
+        <div class="agent-tile">
+          <svg width="40" height="40" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.4">
+            <path d="M28 8 L44 14 V28 Q44 40, 28 48 Q12 40, 12 28 V14 Z" />
+            <line x1="20" y1="22" x2="36" y2="22" /><line x1="20" y1="28" x2="32" y2="28" /><line x1="20" y1="34" x2="34" y2="34" />
+          </svg>
+          <div class="num">05</div>
+          <div class="nm">Advocate</div>
+          <div class="desc">Formats for your doctor</div>
+        </div>
+        <div class="agent-tile">
+          <svg width="40" height="40" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.4">
+            <path d="M28 8 L48 18 L28 28 L8 18 Z" /><path d="M8 28 L28 38 L48 28" /><path d="M8 38 L28 48 L48 38" opacity="0.55" />
+          </svg>
+          <div class="num">06</div>
+          <div class="nm">Librarian</div>
+          <div class="desc">Unifies records</div>
+        </div>
+        <div class="agent-tile">
+          <svg width="40" height="40" viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.4">
+            <circle cx="28" cy="28" r="18" /><path d="M22 34 L28 18 L34 34 L28 30 Z" fill="currentColor" fill-opacity="0.15" />
+            <line x1="28" y1="6" x2="28" y2="10" /><line x1="28" y1="46" x2="28" y2="50" /><line x1="6" y1="28" x2="10" y2="28" /><line x1="46" y1="28" x2="50" y2="28" />
+          </svg>
+          <div class="num">07</div>
+          <div class="nm">Scout</div>
+          <div class="desc">Context-aware</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- product shot -->
+    <div class="product-shot">
+      <div class="ss-head">
+        <div>
+          <div class="ss-meta">VISIT PREP · 14 DAYS · RHEUMATOLOGY</div>
+          <div class="ss-title" style="margin-top:6px;">Patient summary</div>
+        </div>
+        <div class="ss-meta">v · 0.1.0</div>
+      </div>
+      <div class="metrics">
+        <div class="metric"><div class="lbl">Sleep avg</div><div class="val">5.5h</div><div class="delta">↓ 0.9</div></div>
+        <div class="metric"><div class="lbl">Pain ep.</div><div class="val">12</div><div class="delta">↑ 4</div></div>
+        <div class="metric"><div class="lbl">Sev 8+</div><div class="val">67%</div><div class="delta">↑ 18%</div></div>
+      </div>
+      <div class="chart">
+        <svg width="100%" height="90" viewBox="0 0 600 90" preserveAspectRatio="none">
+          <path d="M0,60 L40,52 L80,55 L120,68 L160,72 L200,62 L240,68 L280,40 L320,48 L360,55 L400,62 L440,72 L480,80 L520,55 L560,40 L600,32"
+                stroke="var(--sage-700)" stroke-width="2" fill="none" stroke-linecap="round" />
+          <path d="M0,60 L40,52 L80,55 L120,68 L160,72 L200,62 L240,68 L280,40 L320,48 L360,55 L400,62 L440,72 L480,80 L520,55 L560,40 L600,32 L600,90 L0,90 Z"
+                fill="var(--sage-100)" opacity="0.5" />
+        </svg>
+      </div>
+      <div class="insight">
+        Nights with 3+ interruptions → <em>2.3× higher</em> next-day pain. 9 of 12 high-severity episodes followed such nights.
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-foot" style="margin-top: 32px;">
+    <span>03 · THE SOLUTION</span>
+    <span>03 / 06</span>
+  </div>
+</section>
+
+<!-- ============== SLIDE 4: TRACTION ============== -->
+<section data-screen-label="04 Traction">
+  <div class="slide-head">
+    <div class="slide-mark">
+      <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+        <path d="M6 11 C 6 7, 10 5, 14 7 L 14 11" stroke="var(--sage-700)" stroke-width="1.6" fill="none" stroke-linecap="round" />
+        <path d="M18 21 L 18 25 C 22 27, 26 25, 26 21" stroke="var(--sage-700)" stroke-width="1.6" fill="none" stroke-linecap="round" />
+        <circle cx="10" cy="16" r="1.6" fill="var(--sage-700)" /><circle cx="16" cy="16" r="1.6" fill="var(--sage-700)" /><circle cx="22" cy="16" r="1.6" fill="var(--sage-700)" />
+      </svg>
+      <span class="name" style="font-size:18px">Translate Health</span>
+    </div>
+    <span class="deck-eyebrow">04 · Traction</span>
+  </div>
+
+  <div style="margin-top: 56px; max-width: 1400px;">
+    <h2 class="deck-h2" style="font-size: 96px;">Built and deployed<br /><em>for six months.</em></h2>
+    <p class="deck-lead" style="margin-top: 28px;">
+      A working personal stack handling daily check-ins, correlation analysis, and provider reports — running in production for one chronically ill patient since October.
+    </p>
+  </div>
+
+  <div class="traction-stats">
+    <div class="stat-big">
+      <div class="lbl">Conversational check-ins parsed</div>
+      <div class="val">200<span class="unit">+</span></div>
+      <div class="body">Three-times-daily SMS pings → structured fields, all corrected and verified by the patient.</div>
+    </div>
+    <div class="stat-big">
+      <div class="lbl">Provider reports generated</div>
+      <div class="val">15<span class="unit">+</span></div>
+      <div class="body">Specialty-tailored one-pagers — neurology, rheumatology, PCP — used in real visits, with reported impact on diagnostic conversation.</div>
+    </div>
+    <div class="stat-big">
+      <div class="lbl">Detected correlations</div>
+      <div class="val">9</div>
+      <div class="body">Pattern flags surfaced by The Analyst, including the 2.3× sleep-fragmentation → pain finding that changed the patient's clinical conversation.</div>
+    </div>
+  </div>
+
+  <div class="slide-foot">
+    <span>04 · TRACTION</span>
+    <span>04 / 06</span>
+  </div>
+</section>
+
+<!-- ============== SLIDE 5: VISION ============== -->
+<section data-screen-label="05 Vision">
+  <div class="slide-head">
+    <div class="slide-mark">
+      <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+        <path d="M6 11 C 6 7, 10 5, 14 7 L 14 11" stroke="var(--sage-700)" stroke-width="1.6" fill="none" stroke-linecap="round" />
+        <path d="M18 21 L 18 25 C 22 27, 26 25, 26 21" stroke="var(--sage-700)" stroke-width="1.6" fill="none" stroke-linecap="round" />
+        <circle cx="10" cy="16" r="1.6" fill="var(--sage-700)" /><circle cx="16" cy="16" r="1.6" fill="var(--sage-700)" /><circle cx="22" cy="16" r="1.6" fill="var(--sage-700)" />
+      </svg>
+      <span class="name" style="font-size:18px">Translate Health</span>
+    </div>
+    <span class="deck-eyebrow">05 · Vision</span>
+  </div>
+
+  <div style="margin-top: 48px; max-width: 1500px;">
+    <h2 class="deck-h2" style="font-size: 88px;">Every chronic illness patient<br />deserves a <em>health intelligence team.</em></h2>
+    <p class="deck-lead" style="margin-top: 24px; font-size: 22px;">
+      The flow is the product. Talk → Translate → Analyze → Share. Repeat for life. The agents do the invisible work.
+    </p>
+  </div>
+
+  <div class="flow-grid">
+    <div class="flow-step">
+      <div class="icon">
+        <svg width="28" height="28" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3">
+          <path d="M3 7 Q3 4 6 4 H14 Q17 4 17 7 V11 Q17 14 14 14 H10 L6 17 V14 Q3 14 3 11 Z" stroke-linejoin="round" />
+          <circle cx="7.5" cy="9" r="0.9" fill="currentColor" /><circle cx="10" cy="9" r="0.9" fill="currentColor" /><circle cx="12.5" cy="9" r="0.9" fill="currentColor" />
+        </svg>
+      </div>
+      <span class="stepnum">STEP / 01</span>
+      <div class="title">Talk</div>
+      <div class="body">SMS, WhatsApp, web chat. Two words or two paragraphs. No streaks. No guilt.</div>
+      <span class="arrow-between">→</span>
+    </div>
+    <div class="flow-step">
+      <div class="icon">
+        <svg width="28" height="28" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3">
+          <path d="M3 6 H8 M5.5 4 V13" stroke-linecap="round" /><path d="M3 13 Q5.5 9.5 8 13" fill="none" stroke-linecap="round" />
+          <path d="M11 16 L14 9 L17 16 M12 14 H16" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </div>
+      <span class="stepnum">STEP / 02</span>
+      <div class="title">Translate</div>
+      <div class="body">Natural language becomes typed, timestamped, severity-scored fields. Correctable in one tap.</div>
+      <span class="arrow-between">→</span>
+    </div>
+    <div class="flow-step">
+      <div class="icon">
+        <svg width="28" height="28" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3">
+          <path d="M3 17 V3 M3 17 H17" stroke-linecap="round" />
+          <path d="M5.5 14 L8 11 L10 12.5 L13 8 L16 5.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+          <circle cx="16" cy="5.5" r="1.6" fill="currentColor" />
+        </svg>
+      </div>
+      <span class="stepnum">STEP / 03</span>
+      <div class="title">Analyze</div>
+      <div class="body">Cross-variable correlations, anomalies, same-day clusters — flagged in plain language.</div>
+      <span class="arrow-between">→</span>
+    </div>
+    <div class="flow-step">
+      <div class="icon">
+        <svg width="28" height="28" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3">
+          <circle cx="5" cy="10" r="2" /><circle cx="15" cy="5" r="2" /><circle cx="15" cy="15" r="2" />
+          <path d="M6.7 9 L13.3 5.8 M6.7 11 L13.3 14.2" stroke-linecap="round" />
+        </svg>
+      </div>
+      <span class="stepnum">STEP / 04</span>
+      <div class="title">Share</div>
+      <div class="body">Specialty-tailored one-pagers. Shareable with expiration. Your data, exportable, anywhere.</div>
+    </div>
+  </div>
+
+  <div class="slide-foot">
+    <span>05 · VISION</span>
+    <span>05 / 06</span>
+  </div>
+</section>
+
+<!-- ============== SLIDE 6: ASK ============== -->
+<section data-screen-label="06 Ask" class="s6">
+  <div class="slide-head">
+    <div class="slide-mark">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+        <path d="M6 11 C 6 7, 10 5, 14 7 L 14 11" stroke="var(--paper)" stroke-width="1.6" fill="none" stroke-linecap="round" />
+        <path d="M18 21 L 18 25 C 22 27, 26 25, 26 21" stroke="var(--paper)" stroke-width="1.6" fill="none" stroke-linecap="round" />
+        <circle cx="10" cy="16" r="1.6" fill="var(--paper)" /><circle cx="16" cy="16" r="1.6" fill="var(--paper)" /><circle cx="22" cy="16" r="1.6" fill="var(--paper)" />
+      </svg>
+      <span class="name" style="color: var(--paper);">Translate Health</span>
+    </div>
+    <span class="deck-eyebrow">06 · The ask</span>
+  </div>
+
+  <div style="margin-top: 88px; max-width: 1500px;">
+    <h1 class="deck-h1" style="font-size: 128px;">Joining the<br /><em>Founding 500</em></h1>
+    <p class="ask-lead">
+      To scale from a personal stack — built and tested in the lived reality of chronic illness — to a patient platform with the cohort, capital, and clinical partnerships to reach the people who need it most.
+    </p>
+  </div>
+
+  <div class="contact-grid">
+    <div class="cell">
+      <div class="lbl">Web</div>
+      <div class="val">translatehealth.ai</div>
+    </div>
+    <div class="cell">
+      <div class="lbl">Email</div>
+      <div class="val">hello@translatehealth.ai</div>
+    </div>
+    <div class="cell">
+      <div class="lbl">Cohort</div>
+      <div class="val">Founding 500 · 2026</div>
+    </div>
+  </div>
+
+  <div class="slide-foot">
+    <span style="color: rgba(250,248,245,0.55);">06 · THE ASK</span>
+    <span style="color: rgba(250,248,245,0.55);">06 / 06 — END</span>
+  </div>
+</section>
+
+</deck-stage>
+
+<script src="deck-stage.js"></script>
+</body>
+</html>
