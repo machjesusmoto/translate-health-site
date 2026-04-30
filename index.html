@@ -589,10 +589,32 @@ const Waitlist = () => {
 
 const Footer = () => {
   const cols = [
-    { title: "Product", links: ["How it works", "Agents", "Features", "For providers", "Pricing"] },
-    { title: "Company", links: ["About", "Blog", "Founding 500", "Careers", "Press"] },
-    { title: "Resources", links: ["Patient guide", "Provider one-pager", "Security", "Status"] },
-    { title: "Legal", links: ["Privacy", "Terms", "HIPAA notice", "Subprocessors"] },
+    { title: "Product", links: [
+      { label: "How it works", href: "#how" },
+      { label: "Agents", href: "#agents" },
+      { label: "Features", href: null },
+      { label: "For providers", href: null },
+      { label: "Pricing", href: null },
+    ]},
+    { title: "Company", links: [
+      { label: "About", href: null },
+      { label: "Blog", href: null },
+      { label: "Founding 500", href: "#waitlist" },
+      { label: "Careers", href: null },
+      { label: "Press", href: null },
+    ]},
+    { title: "Resources", links: [
+      { label: "Patient guide", href: null },
+      { label: "Provider one-pager", href: null },
+      { label: "Security", href: null },
+      { label: "Status", href: null },
+    ]},
+    { title: "Legal", links: [
+      { label: "Privacy", href: "/privacy" },
+      { label: "Terms", href: "/terms" },
+      { label: "HIPAA notice", href: null },
+      { label: "Subprocessors", href: null },
+    ]},
   ];
   return (
     <footer style={{ background: "var(--ink-900)", color: "var(--paper)", padding: "72px 0 40px" }}>
@@ -609,7 +631,13 @@ const Footer = () => {
               <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "rgba(250,248,245,0.45)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 14 }}>{c.title}</div>
               <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 8 }}>
                 {c.links.map(l => (
-                  <li key={l}><a href="#" style={{ color: "rgba(250,248,245,0.85)", textDecoration: "none", fontSize: 14 }}>{l}</a></li>
+                  <li key={l.label}>
+                    {l.href ? (
+                      <a href={l.href} style={{ color: "rgba(250,248,245,0.85)", textDecoration: "none", fontSize: 14 }}>{l.label}</a>
+                    ) : (
+                      <span style={{ color: "rgba(250,248,245,0.35)", fontSize: 14, cursor: "default" }}>{l.label}</span>
+                    )}
+                  </li>
                 ))}
               </ul>
             </div>
