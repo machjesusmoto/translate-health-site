@@ -598,7 +598,11 @@ const Waitlist = () => {
     try {
       const res = await fetch('https://ugxusqcfbcrjxgshvawr.supabase.co/functions/v1/waitlist-submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVneHVzcWNmYmNyanhnc2h2YXdyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE2NDYxMTksImV4cCI6MjA4NzIyMjExOX0.8TUsoSPxpFI_EGxPmArx4XdkToJv3TtoXvaxN-v9CbA',
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVneHVzcWNmYmNyanhnc2h2YXdyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE2NDYxMTksImV4cCI6MjA4NzIyMjExOX0.8TUsoSPxpFI_EGxPmArx4XdkToJv3TtoXvaxN-v9CbA'
+        },
         body: JSON.stringify({ email, source: 'founding-500' }),
       });
       if (res.ok) {
