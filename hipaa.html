@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="HIPAA Notice — Translate Health. How we protect your health information." />
+<title>HIPAA Notice — Translate Health</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Geist:wght@300;400;450;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body data-warmth="warm" data-density="default">
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin></script>
+
+<script type="text/babel">
+const TH_Logo = ({ size = 28, color = "currentColor" }) => (
+  <span style={{ display: "inline-flex", alignItems: "center", gap: 10, color }}>
+    <svg width={size} height={size} viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <path d="M6 11 C 6 7, 10 5, 14 7 L 14 11" stroke={color} strokeWidth="1.6" fill="none" strokeLinecap="round" />
+      <path d="M18 21 L 18 25 C 22 27, 26 25, 26 21" stroke={color} strokeWidth="1.6" fill="none" strokeLinecap="round" />
+      <circle cx="10" cy="16" r="1.6" fill={color} />
+      <circle cx="16" cy="16" r="1.6" fill={color} />
+      <circle cx="22" cy="16" r="1.6" fill={color} />
+    </svg>
+    <span style={{ fontFamily: "var(--font-display)", fontSize: 19, fontWeight: 420, letterSpacing: "-0.01em", color }}>Translate Health</span>
+  </span>
+);
+
+const Arrow = ({ size = 14 }) => (
+  <svg width={size} height={size} viewBox="0 0 14 14" className="arrow" aria-hidden="true">
+    <path d="M2 7 H11 M7.5 3.5 L11 7 L7.5 10.5" stroke="currentColor" strokeWidth="1.4" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const Nav = () => {
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  return (
+    <header style={{
+      position: "sticky", top: 0, zIndex: 50,
+      background: "rgba(250,248,245,0.82)",
+      backdropFilter: "saturate(180%) blur(12px)",
+      WebkitBackdropFilter: "saturate(180%) blur(12px)",
+      borderBottom: "1px solid rgba(45,45,45,0.06)",
+    }}>
+      <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 68 }}>
+        <a href="/" style={{ textDecoration: "none" }}><TH_Logo color="var(--ink-900)" /></a>
+        <nav style={{ display: "flex", gap: 32 }}>
+          <a href="/#how" style={{ fontSize: 14, color: "var(--ink-700)", textDecoration: "none", fontWeight: 450, letterSpacing: "-0.005em" }}>How it works</a>
+          <a href="/#agents" style={{ fontSize: 14, color: "var(--ink-700)", textDecoration: "none", fontWeight: 450, letterSpacing: "-0.005em" }}>Agents</a>
+          <a href="/for-providers.html" style={{ fontSize: 14, color: "var(--ink-700)", textDecoration: "none", fontWeight: 450, letterSpacing: "-0.005em" }}>For providers</a>
+          <a href="/about.html" style={{ fontSize: 14, color: "var(--ink-700)", textDecoration: "none", fontWeight: 450, letterSpacing: "-0.005em" }}>About</a>
+        </nav>
+        <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+          <a href="#" style={{ fontSize: 14, color: "var(--ink-700)", textDecoration: "none", fontWeight: 450 }}>Sign in</a>
+          <a href="/#waitlist" className="btn btn-primary" style={{ padding: "10px 18px", fontSize: 14 }}>Join waitlist <Arrow /></a>
+          <button
+            className="nav-mobile-toggle"
+            onClick={() => setMobileOpen(o => !o)}
+            aria-label="Toggle menu"
+            style={{
+              display: "none",
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              padding: 8,
+              color: "var(--ink-700)",
+            }}
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <line x1="3" y1="6" x2="21" y2="6" />
+              <line x1="3" y1="12" x2="21" y2="12" />
+              <line x1="3" y1="18" x2="21" y2="18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div className={`nav-mobile-menu${mobileOpen ? " open" : ""}`}>
+        <a href="/#how" onClick={() => setMobileOpen(false)}>How it works</a>
+        <a href="/#agents" onClick={() => setMobileOpen(false)}>Agents</a>
+        <a href="/for-providers.html" onClick={() => setMobileOpen(false)}>For providers</a>
+        <a href="/about.html" onClick={() => setMobileOpen(false)}>About</a>
+        <a href="/#waitlist" className="btn btn-primary" style={{ justifyContent: "center", marginTop: 4 }} onClick={() => setMobileOpen(false)}>Join waitlist <Arrow /></a>
+      </div>
+    </header>
+  );
+};
+
+const Footer = () => {
+  const cols = [
+    { title: "Product", links: [
+      { label: "How it works", href: "/#how" },
+      { label: "Agents", href: "/#agents" },
+      { label: "Dashboard", href: "/dashboard" },
+      { label: "Features", href: "/features.html" },
+      { label: "For providers", href: "/for-providers.html" },
+      { label: "Pricing", href: "/pricing.html" },
+    ]},
+    { title: "Company", links: [
+      { label: "About", href: "/about.html" },
+      { label: "Blog", href: null },
+      { label: "Founding 500", href: "/#waitlist" },
+      { label: "Careers", href: null },
+      { label: "Press", href: null },
+    ]},
+    { title: "Resources", links: [
+      { label: "Support", href: "/support" },
+      { label: "Get started", href: "/register" },
+      { label: "Patient guide", href: null },
+      { label: "Provider one-pager", href: null },
+      { label: "Security", href: null },
+      { label: "Status", href: null },
+    ]},
+    { title: "Legal", links: [
+      { label: "Privacy", href: "/privacy" },
+      { label: "Terms", href: "/terms" },
+      { label: "Settings", href: "/settings" },
+      { label: "HIPAA notice", href: "/hipaa.html" },
+      { label: "Subprocessors", href: null },
+    ]},
+  ];
+  return (
+    <footer style={{ background: "var(--ink-900)", color: "var(--paper)", padding: "72px 0 40px" }}>
+      <div className="container">
+        <div style={{ display: "grid", gridTemplateColumns: "1.4fr repeat(4, 1fr)", gap: 48, marginBottom: 56 }}>
+          <div>
+            <TH_Logo color="var(--paper)" />
+            <p style={{ marginTop: 18, fontSize: 14, color: "rgba(250,248,245,0.55)", maxWidth: 280, lineHeight: 1.55 }}>
+              An AI health coordination platform for chronic illness. You talk. We translate. Doctors listen.
+            </p>
+          </div>
+          {cols.map(c => (
+            <div key={c.title}>
+              <div style={{ fontFamily: "var(--font-mono)", fontSize: 11, color: "rgba(250,248,245,0.45)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 14 }}>{c.title}</div>
+              <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: 8 }}>
+                {c.links.map(l => (
+                  <li key={l.label}>
+                    {l.href ? (
+                      <a href={l.href} style={{ color: "rgba(250,248,245,0.85)", textDecoration: "none", fontSize: 14 }}>{l.label}</a>
+                    ) : (
+                      <span style={{ color: "rgba(250,248,245,0.35)", fontSize: 14, cursor: "default" }}>{l.label}</span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <div style={{ paddingTop: 24, borderTop: "1px solid rgba(250,248,245,0.10)", display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 12, color: "rgba(250,248,245,0.45)", flexWrap: "wrap", gap: 12 }}>
+          <span>© 2026 Translate Health · Built by patients, for patients</span>
+          <span style={{ fontFamily: "var(--font-mono)" }}>v 0.1.0 · Founding 500</span>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+const Section = ({ title, children }) => (
+  <div style={{ marginBottom: 40 }}>
+    <h2 style={{ fontFamily: "var(--font-display)", fontSize: 22, fontWeight: 420, color: "var(--ink-900)", margin: "0 0 14px", letterSpacing: "-0.01em" }}>{title}</h2>
+    <div style={{ fontSize: 15, color: "var(--ink-500)", lineHeight: 1.65 }}>{children}</div>
+  </div>
+);
+
+const App = () => (
+  <React.Fragment>
+    <Nav />
+    <main>
+      <section className="section" style={{ minHeight: "60vh" }}>
+        <div className="container-narrow">
+          <div className="eyebrow" style={{ marginBottom: 16 }}>Legal</div>
+          <h1 className="display display-l" style={{ margin: "0 0 12px" }}>
+            HIPAA <em style={{ color: "var(--sage-700)", fontWeight: 360 }}>Notice</em>
+          </h1>
+          <p style={{ fontSize: 14, color: "var(--ink-400)", marginBottom: 48 }}>
+            Last updated: May 2026 · Effective immediately
+          </p>
+
+          <Section title="1. What data we collect">
+            <p>Translate Health collects health information that you voluntarily provide through SMS, WhatsApp, web chat, or manual entry. This includes:</p>
+            <ul style={{ paddingLeft: 20, margin: "10px 0" }}>
+              <li>Symptom descriptions, severity ratings, and timestamps</li>
+              <li>Sleep duration and quality estimates</li>
+              <li>Medication names, dosages, and timing</li>
+              <li>Activity levels and lifestyle factors</li>
+              <li>Provider names, specialties, and appointment dates</li>
+              <li>Device data (Apple Health, Whoop, etc.) if you choose to connect them</li>
+            </ul>
+            <p>We do not collect: insurance information, social security numbers, financial data, or government IDs.</p>
+          </Section>
+
+          <Section title="2. How we use your data">
+            <ul style={{ paddingLeft: 20, margin: "10px 0" }}>
+              <li><strong>Structuring:</strong> Natural language inputs are parsed into typed, timestamped health records by our Translator agent.</li>
+              <li><strong>Analysis:</strong> The Analyst agent identifies patterns and correlations across your data.</li>
+              <li><strong>Reporting:</strong> The Storyteller and Advocate agents generate summaries formatted for your providers.</li>
+              <li><strong>Communication:</strong> The Coordinator agent sends check-in messages via SMS or WhatsApp.</li>
+            </ul>
+            <p>We do not use your health data for advertising, model training, or any purpose other than delivering the service to you.</p>
+          </Section>
+
+          <Section title="3. Who we share it with">
+            <p>We share your data only with:</p>
+            <ul style={{ paddingLeft: 20, margin: "10px 0" }}>
+              <li><strong>You:</strong> Always. Full access, full export, full deletion.</li>
+              <li><strong>Your providers:</strong> Only when you explicitly generate and share a report link. Links expire automatically.</li>
+              <li><strong>Subprocessors with BAAs:</strong> Supabase (data storage), Twilio (SMS/WhatsApp delivery), OpenAI (natural language processing). All have signed Business Associate Agreements.</li>
+            </ul>
+            <p>We never sell data. We never share with advertisers or data brokers.</p>
+          </Section>
+
+          <Section title="4. Your rights">
+            <p>Under HIPAA and applicable state laws, you have the right to:</p>
+            <ul style={{ paddingLeft: 20, margin: "10px 0" }}>
+              <li><strong>Access:</strong> View all data we hold about you at any time.</li>
+              <li><strong>Amend:</strong> Correct any extracted field with one tap.</li>
+              <li><strong>Delete:</strong> Permanently delete your account and all associated data. No retention period.</li>
+              <li><strong>Export:</strong> Download your data in CSV, FHIR, or PDF format.</li>
+              <li><strong>Restrict:</strong> Limit how specific data types are used or shared.</li>
+              <li><strong>Complain:</strong> File a complaint with us or the U.S. Department of Health and Human Services.</li>
+            </ul>
+          </Section>
+
+          <Section title="5. Security measures">
+            <ul style={{ paddingLeft: 20, margin: "10px 0" }}>
+              <li>AES-256 encryption at rest (Supabase)</li>
+              <li>TLS 1.3 encryption in transit</li>
+              <li>Row-level security (RLS) on all database tables</li>
+              <li>Service role keys isolated in Edge Functions, never exposed to the frontend</li>
+              <li>Regular access logging and anomaly detection</li>
+              <li>SOC 2 Type II audit in progress</li>
+            </ul>
+          </Section>
+
+          <Section title="6. AI and natural language processing">
+            <p>Your messages may be processed by OpenAI's API to extract structured health data. We:</p>
+            <ul style={{ paddingLeft: 20, margin: "10px 0" }}>
+              <li>Do not allow OpenAI to train models on your data (zero-retention agreement)</li>
+              <li>Strip identifiable information where possible before API calls</li>
+              <li>Log every AI interaction for audit purposes</li>
+              <li>Allow you to review and correct every AI-extracted field</li>
+            </ul>
+          </Section>
+
+          <Section title="7. Contact">
+            <p>
+              <strong>Privacy Officer</strong><br />
+              Translate Health<br />
+              Email: <a href="mailto:privacy@translatehealth.ai" style={{ color: "var(--sage-700)" }}>privacy@translatehealth.ai</a><br />
+              Response time: Within 48 hours
+            </p>
+          </Section>
+
+          <div style={{ marginTop: 48, paddingTop: 32, borderTop: "1px solid rgba(45,45,45,0.08)", textAlign: "center" }}>
+            <a href="/" className="btn btn-primary">Back to home <Arrow /></a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <Footer />
+  </React.Fragment>
+);
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>
