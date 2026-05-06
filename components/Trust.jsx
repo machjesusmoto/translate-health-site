@@ -28,7 +28,7 @@ const Trust = () => {
               padding: "12px 16px", background: "var(--paper-card)", borderRadius: 8,
               borderLeft: "2px solid var(--sage-500)",
             }}>
-              <strong style={{ color: "var(--ink-700)" }}>Built by a patient, for patients.</strong> Translate Health started as a personal stack — daily check-ins, correlation analysis, and provider reports for one chronically ill person. Now we're opening it to the Founding 500.
+              <strong style={{ color: "var(--ink-700)" }}>Built by a patient, for patients.</strong> Translate Health started as a personal stack — daily check-ins, correlation analysis, and provider reports for one chronically ill person. Now we're opening it to the Early Voices.
             </p>
 
             <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>

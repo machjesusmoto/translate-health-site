@@ -15,7 +15,7 @@ const Waitlist = () => {
         <div className="eyebrow" style={{ marginBottom: 18 }}>The waitlist</div>
         <h2 className="display display-xl" style={{ margin: 0, marginBottom: 22 }}>
           Be among the<br />
-          <em style={{ color: "var(--sage-700)", fontWeight: 360 }}>Founding 500.</em>
+          <em style={{ color: "var(--sage-700)", fontWeight: 360 }}>Early Voices.</em>
         </h2>
         <p className="lead" style={{ margin: "0 auto 40px", textAlign: "center" }}>
           We're onboarding small cohorts of chronic illness patients through 2026. Founding members get lifetime access at the Patient tier and a hand in shaping what gets built next.
@@ -63,7 +63,7 @@ const Waitlist = () => {
 const Footer = () => {
   const cols = [
     { title: "Product", links: ["How it works", "Agents", "Features", "For providers", "Pricing"] },
-    { title: "Company", links: ["About", "Blog", "Founding 500", "Careers", "Press"] },
+    { title: "Company", links: ["About", "Blog", "Early Voices", "Careers", "Press"] },
     { title: "Resources", links: ["Patient guide", "Provider one-pager", "Security", "Status"] },
     { title: "Legal", links: ["Privacy", "Terms", "HIPAA notice", "Subprocessors"] },
   ];
@@ -111,7 +111,7 @@ const Footer = () => {
           fontSize: 12, color: "rgba(250,248,245,0.45)", flexWrap: "wrap", gap: 12,
         }}>
           <span>© 2026 Translate Health · Built by patients, for patients</span>
-          <span style={{ fontFamily: "var(--font-mono)" }}>v 0.1.0 · Founding 500</span>
+          <span style={{ fontFamily: "var(--font-mono)" }}>v 0.1.0 · Early Voices</span>
         </div>
       </div>
     </footer>

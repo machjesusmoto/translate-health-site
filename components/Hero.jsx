@@ -34,7 +34,7 @@ const Hero = () => {
           <div>
             <div className="pill" style={{ marginBottom: 28 }}>
               <span className="dot" />
-              <span>Now in private beta · Founding 500</span>
+              <span>Now in private beta · Early Voices</span>
             </div>
 
             <h1 className="display display-xxl" style={{ margin: 0 }}>
